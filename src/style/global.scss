@@ -1,12 +1,21 @@
 @import 'reset';
 @import 'typography';
-@import "variables";
+@import 'variables';
 
-.page-enter-active, .page-leave-active {
-  transition: 0.35s;
-}
+.page {
+  &-enter-active,
+  &-leave-active {
+    transition: 0.35s;
+    overflow: hidden;
+  }
 
-.page-enter, .page-leave-to {
-  transform: translateX(-5%);
-  opacity: 0;
+  &-leave-to {
+    transform: translateX(3%);
+    opacity: 0;
+  }
+
+  &-enter {
+    transform: translateX(-3%);
+    opacity: 0;
+  }
 }

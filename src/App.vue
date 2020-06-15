@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-header />
-    <transition name="page" mode="out-in">
+    <transition name="page" mode="in-uot">
       <router-view></router-view>
     </transition>
   </div>
