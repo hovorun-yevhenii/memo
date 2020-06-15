@@ -1,0 +1,12 @@
+@import 'reset';
+@import 'typography';
+@import "variables";
+
+.page-enter-active, .page-leave-active {
+  transition: 0.35s;
+}
+
+.page-enter, .page-leave-to {
+  transform: translateX(-5%);
+  opacity: 0;
+}

@@ -11,3 +11,14 @@ export default {
   name: "AppHome"
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../style/variables";
+
+a {
+  display: inline-flex;
+  padding: 64px;
+  border: 2px solid $border-color;
+  border-radius: 4px;
+}
+</style>
