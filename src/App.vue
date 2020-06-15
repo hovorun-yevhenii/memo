@@ -8,6 +8,6 @@
 <style lang="scss">
 .header {
   padding: 24px;
-  background-color: #fa0;
+  background-color: lightcoral;
 }
 </style>
