@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    <app-logo />
+    <div class="container">
+      <app-logo />
+    </div>
   </div>
 </template>
 
@@ -21,5 +23,9 @@ export default {
 .header {
   padding: 24px;
   background-color: $default-bg;
+
+  @media (max-width: $breakpoint-phone) {
+    padding: 12px;
+  }
 }
 </style>

@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <app-header />
-    <transition name="page" mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <div class="container">
+      <transition name="page" mode="out-in">
+        <router-view></router-view>
+      </transition>
+    </div>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
-  <router-link to="/" class="logo">
-    <svg viewBox="0 0 24 24">
+  <router-link tag="div" to="/" class="logo">
+    <svg class="logo__image" viewBox="0 0 24 24">
       <path
         class="fill-blue"
         d="m12.25 2h-1.1c-.33-1.15-1.39-2-2.65-2s-2.32.85-2.65 2h-1.1c-.41 0-.75.34-.75.75v1.5c0 .96.79 1.75 1.75 1.75h5.5c.96 0 1.75-.79 1.75-1.75v-1.5c0-.41-.34-.75-.75-.75z"
@@ -14,6 +14,7 @@
         d="m12.527 24c-.197 0-.389-.078-.53-.22-.173-.173-.251-.419-.208-.661l.53-3.005c.026-.151.1-.291.208-.4l7.425-7.424c.912-.914 1.808-.667 2.298-.177l1.237 1.237c.683.682.683 1.792 0 2.475l-7.425 7.425c-.108.109-.248.182-.4.208l-3.005.53c-.043.008-.087.012-.13.012zm3.005-1.28h.01z"
       />
     </svg>
+    <span class="logo__title">Memo</span>
   </router-link>
 </template>
 
@@ -27,21 +28,43 @@ export default {
 @import "../style/variables";
 
 .logo {
-  display: block;
-  height: 32px;
-  width: 32px;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  user-select: none;
+  cursor: pointer;
 
-  svg {
-    max-width: 100%;
-    max-height: 100%;
+  &:hover {
+    .fill-orange {
+      transform: translate3d(-5px, -5px, 0) scale(1.3);
+    }
   }
 
-  .fill-blue {
-    fill: $main-blue;
+  &__image {
+    height: 100%;
+    .fill-blue {
+      fill: $main-blue;
+    }
+
+    .fill-orange {
+      fill: $main-orange;
+      stroke: $default-bg;
+      transform-origin: center;
+      transition: transform 0.35s;
+    }
   }
 
-  .fill-orange {
-    fill: $main-orange;
+  &__title {
+    margin: 0 16px;
+    font-family: $montserrat;
+    font-size: 32px;
+    color: $main-orange;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  @media (max-width: $breakpoint-phone) {
+    justify-content: center;
   }
 }
 </style>
