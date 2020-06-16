@@ -1,5 +1,5 @@
-@import 'reset';
-@import 'typography';
+@import "reset";
+@import "typography";
 @import "variables";
 
 .page-enter-active,
@@ -15,7 +15,6 @@
 .page-leave-to {
   transform: scale(-0.42);
 }
-
 
 .page-enter {
   transform: scale(0.42);
