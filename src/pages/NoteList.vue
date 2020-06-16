@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div>
     <router-link :to="{ name: 'note', params: { id: 1 } }">1</router-link>
     <br />
     <router-link :to="{ name: 'note', params: { id: 2 } }">2</router-link>
