@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../pages/NoteList.vue";
+import NoteList from "../pages/NoteList.vue";
 
 Vue.use(VueRouter);
 
@@ -10,8 +10,8 @@ const router = new VueRouter({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "list",
+      component: NoteList
     },
     {
       path: "/note/:id",

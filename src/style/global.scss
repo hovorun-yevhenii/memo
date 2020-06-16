@@ -4,7 +4,7 @@
 
 .page-enter-active,
 .page-leave-active {
-  transition: 0.35s;
+  transition: 0.25s;
 }
 
 .page-leave-to,
@@ -13,14 +13,14 @@
 }
 
 .page-leave-to {
-  transform: scale(-0.42);
+  transform: scale(0.9);
 }
 
 .page-enter {
-  transform: scale(0.42);
+  transform: scale(1.1);
 }
 
 .container {
-  max-width: 900px;
+  max-width: $breakpoint-desktop;
   margin: 0 auto;
 }
