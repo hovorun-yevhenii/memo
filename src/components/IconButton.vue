@@ -52,8 +52,10 @@ export default {
 
 <style lang="scss">
 @import "../style/global";
+@import "../style/mixins";
 
 .icon-button {
+  @include empty-button;
   position: relative;
   display: flex;
   align-items: center;
@@ -61,9 +63,7 @@ export default {
   background-color: transparent;
   width: 36px;
   height: 36px;
-  border: none;
   border-radius: 50%;
-  cursor: pointer;
   transition: background-color 0.35s;
   &.default *,
   &.checkbox * {
@@ -74,9 +74,6 @@ export default {
   }
   &.success * {
     color: $success-color;
-  }
-  &:focus {
-    outline: none;
   }
   &:hover {
     background-color: rgba(black, 0.7);
