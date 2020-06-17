@@ -6,11 +6,16 @@
 </template>
 
 <script>
+import { NEW_NOTE_KEY } from "../../constants";
+
 export default {
   name: "NewNoteButton",
   methods: {
     handleClick() {
-      this.$router.push({ name: "note" });
+      this.$router.push({
+        name: "note",
+        params: { id: NEW_NOTE_KEY }
+      });
     }
   }
 };

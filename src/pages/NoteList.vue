@@ -43,15 +43,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      notes: "getNotes"
-    })
-  },
-  created() {
-    this.fetchNotes();
+    ...mapGetters(["notes"])
   },
   methods: {
-    ...mapActions(["fetchNotes", "deleteNote"]),
+    ...mapActions(["deleteNote"]),
     handleEdit({ id }) {
       this.$router.push({
         name: "note",

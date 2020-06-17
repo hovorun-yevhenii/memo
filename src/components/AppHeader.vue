@@ -18,12 +18,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../style/_variables.scss";
+@import "../style/variables.scss";
 
 .header {
   padding: 24px;
   background-color: $default-bg;
-  border-bottom: 1px solid $border-color;;
+  border-bottom: 1px solid $border-color;
 
   @media (max-width: $breakpoint-phone) {
     padding: 12px;

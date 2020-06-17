@@ -15,6 +15,9 @@ import AppHeader from "./components/AppHeader.vue";
 export default {
   components: {
     AppHeader
+  },
+  created() {
+    this.$store.dispatch("fetchNotes");
   }
 };
 </script>
