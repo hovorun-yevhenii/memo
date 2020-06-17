@@ -51,8 +51,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../style/global";
-@import "../style/mixins";
+@import "../../style/global";
+@import "../../style/mixins";
 
 .icon-button {
   @include empty-button;

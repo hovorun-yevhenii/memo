@@ -1,17 +1,20 @@
 <template>
-  <div class="list">
-    <new-note-button />
+  <div>
+    <transition-group tag="div" name="list" class="list">
+      <new-note-button key="new-note" />
 
-    <app-note
-      v-for="note in notes"
-      :key="note.id"
-      :note="note"
-      :is-editable="false"
-      @edit="handleEdit"
-      @delete="handleDelete"
-    />
+      <app-note
+        v-for="note in notes"
+        :key="note.id"
+        :note="note"
+        :is-editable="false"
+        @edit="handleEdit"
+        @delete="handleDelete"
+      />
+    </transition-group>
 
     <confirm-modal
+      key="modal"
       v-if="showConfirmModal"
       :note="noteToDelete"
       @cancel="closeConfirmModal"

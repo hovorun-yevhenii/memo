@@ -19,8 +19,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../style/variables";
-@import "../style/mixins";
+@import "../../style/variables";
+@import "../../style/mixins";
 
 .button {
   @include empty-button;

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import IconButton from "../IconButton.vue";
+import IconButton from "../buttons/IconButton.vue";
 import ViewModeActions from "../AppNote/ViewModeActions.vue";
 import { LIST_VIEW_ITEMS_COUNT } from "../../constants";
 

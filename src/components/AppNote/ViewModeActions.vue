@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import IconButton from "../IconButton.vue";
+import IconButton from "../buttons/IconButton.vue";
 export default {
   name: "ViewModeActions",
   props: {
