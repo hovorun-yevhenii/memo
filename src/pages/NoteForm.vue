@@ -1,10 +1,6 @@
 <template>
   <div class="form" v-if="note">
     <input type="text" v-model="note.title" />
-    <div>title: {{ note.title }}</div>
-
-    <div>redo: {{ canRedo }}</div>
-    <div>undo: {{ canUndo }}</div>
 
     <div v-for="(item, index) in note.items" :key="index">
       <input v-model="item.checked" type="checkbox" />
@@ -30,8 +26,8 @@ export default {
   },
   watch: {
     note: {
-      handler(note, hasInitialValue) {
-        if (hasInitialValue) {
+      handler(note, oldValue) {
+        if (oldValue) {
           this.$store.dispatch("editNote", note);
         }
       },
