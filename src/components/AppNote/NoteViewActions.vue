@@ -23,7 +23,7 @@
 <script>
 import IconButton from "../buttons/IconButton.vue";
 export default {
-  name: "ViewModeActions",
+  name: "NoteViewActions",
   props: {
     note: {
       type: Object

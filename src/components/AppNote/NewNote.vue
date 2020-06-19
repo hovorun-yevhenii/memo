@@ -9,7 +9,7 @@
 import { NEW_NOTE_KEY } from "../../constants";
 
 export default {
-  name: "NewNoteButton",
+  name: "NewNote",
   methods: {
     handleClick() {
       this.$router.push({

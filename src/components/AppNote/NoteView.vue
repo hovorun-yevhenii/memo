@@ -1,10 +1,9 @@
 <template>
-  <div class="note" :class="{ 'note--editable': isEditable }">
+  <div class="note">
     <div class="note__header">
       <div class="note__title">{{ note.title }}</div>
 
-      <view-mode-actions
-        v-if="!isEditable"
+      <note-view-actions
         :note="note"
         @edit="handleEdit"
         @delete="handleDelete"
@@ -25,32 +24,24 @@
 
 <script>
 import IconButton from "../buttons/IconButton.vue";
-import ViewModeActions from "../AppNote/ViewModeActions.vue";
+import NoteViewActions from "./NoteViewActions.vue";
 import { LIST_VIEW_ITEMS_COUNT } from "../../constants";
 
 export default {
-  name: "AppNote",
+  name: "NoteView",
   components: {
     IconButton,
-    ViewModeActions
+      NoteViewActions
   },
   props: {
     note: {
       type: Object,
       required: true
-    },
-    isEditable: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
     itemsToDisplay() {
-      const limit = this.isEditable
-        ? this.note.items.length
-        : LIST_VIEW_ITEMS_COUNT;
-
-      return this.note.items.slice(0, limit);
+      return this.note.items.slice(0, LIST_VIEW_ITEMS_COUNT);
     },
     restItemsCount() {
       return this.note.items.length - this.itemsToDisplay.length;
@@ -80,10 +71,6 @@ export default {
   border: 1px solid $border-color;
   border-radius: 4px;
   pointer-events: none;
-
-  &--editable {
-    pointer-events: auto;
-  }
 
   @media (max-width: $breakpoint-phone) {
     margin: 8px;

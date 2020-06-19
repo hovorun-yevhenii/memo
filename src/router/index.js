@@ -16,7 +16,7 @@ const router = new VueRouter({
     {
       path: "/note/:id",
       name: "note",
-      component: () => import("../pages/NoteForm.vue")
+      component: () => import("../pages/EditNote.vue")
     },
     {
       path: "*",

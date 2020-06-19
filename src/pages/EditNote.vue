@@ -1,11 +1,6 @@
 <template>
   <div class="form" v-if="note">
-    <input type="text" v-model="note.title" />
-
-    <div v-for="(item, index) in note.items" :key="index">
-      <input v-model="item.checked" type="checkbox" />
-      <input v-model="item.text" spellcheck="false" placeholder="Enter text" />
-    </div>
+    <note-form v-model="note" />
 
     <button @click="undo" :disabled="!canUndo">undo</button>
     <button @click="redo" :disabled="!canRedo">redo</button>
@@ -13,14 +8,18 @@
 </template>
 
 <script>
+import NoteForm from "../components/AppNote/NoteForm.vue";
 import undoRedo from "../mixins/undoRedo";
 import { mapGetters } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
 import { getNoteSchema } from "../utils";
 
 export default {
-  name: "NoteForm",
+  name: "EditNote",
   mixins: [undoRedo],
+  components: {
+    NoteForm
+  },
   computed: {
     ...mapGetters(["getNoteById", "note"])
   },
@@ -61,10 +60,6 @@ export default {
 
 .form {
   padding: 32px;
-
-  input {
-    background-color: transparent;
-  }
 
   button {
     @include empty-button;

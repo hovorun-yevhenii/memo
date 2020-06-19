@@ -1,13 +1,12 @@
 <template>
   <div>
     <transition-group tag="div" name="list" class="list">
-      <new-note-button key="new-note" />
+      <new-note key="new-note" />
 
-      <app-note
+      <note-view
         v-for="note in notes"
         :key="note.id"
         :note="note"
-        :is-editable="false"
         @edit="handleEdit"
         @delete="handleDelete"
       />
@@ -23,16 +22,16 @@
 </template>
 
 <script>
-import AppNote from "../components/AppNote/AppNote.vue";
-import NewNoteButton from "../components/AppNote/NewNoteButton.vue";
+import NoteView from "../components/AppNote/NoteView.vue";
+import NewNote from "../components/AppNote/NewNote.vue";
 import ConfirmModal from "../components/modals/ConfirmModal.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "NoteList",
   components: {
-    AppNote,
-    NewNoteButton,
+    NoteView,
+      NewNote,
     ConfirmModal
   },
   data() {
