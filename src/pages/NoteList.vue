@@ -14,7 +14,6 @@
     </transition-group>
 
     <confirm-modal
-      key="modal"
       v-if="showConfirmModal"
       :note="noteToDelete"
       @cancel="closeConfirmModal"

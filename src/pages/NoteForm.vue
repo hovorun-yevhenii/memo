@@ -18,7 +18,8 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { GET_NOTE_SCHEMA, NEW_NOTE_KEY } from "../constants";
+import { NEW_NOTE_KEY } from "../constants";
+import { getNoteSchema } from "../utils";
 
 export default {
   name: "NoteForm",
@@ -35,7 +36,7 @@ export default {
   },
   created() {
     const id = this.$route.params.id;
-    const note = id === NEW_NOTE_KEY ? GET_NOTE_SCHEMA() : this.getNoteById(id);
+    const note = id === NEW_NOTE_KEY ? getNoteSchema() : this.getNoteById(id);
 
     if (note) {
       this.$store.dispatch("setTempNote", note);

@@ -1,5 +1,9 @@
 <template>
-  <modal-wrapper class="confirm" @click="handleCancel">
+  <modal-wrapper
+    class="confirm"
+    @cancel="handleCancel"
+    @confirm="handleConfirm"
+  >
     <div class="confirm__title">
       Delete note
       <span class="confirm__note-name">{{ note.title }}</span>
@@ -26,18 +30,6 @@ export default {
     note: {
       type: Object
     }
-  },
-  created() {
-    const { innerWidth } = window;
-    const { body, documentElement: html } = document;
-    const scrollbarWidth = innerWidth - html.clientWidth;
-
-    body.style.overflow = "hidden";
-    body.style.paddingRight = `${scrollbarWidth}px`;
-  },
-  destroyed() {
-    document.body.style.overflow = "";
-    document.body.style.paddingRight = "";
   },
   methods: {
     handleCancel() {

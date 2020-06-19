@@ -1,16 +1,25 @@
 <template>
   <transition name="modal" appear>
     <div class="modal" @click.self="handleClick">
-      <div class="modal__body">
-        <slot></slot>
-      </div>
+      <transition name="dialog" appear>
+        <div class="modal__body">
+          <slot></slot>
+        </div>
+      </transition>
     </div>
   </transition>
 </template>
 
 <script>
+import { KEYBOARD_CODES } from "../../constants";
+
 export default {
   name: "ModalWrapper",
+  data() {
+    return {
+      boundKeyHandler: this.handleKeyPress.bind(this)
+    };
+  },
   created() {
     const { innerWidth } = window;
     const { body, documentElement: html } = document;
@@ -18,14 +27,30 @@ export default {
 
     body.style.overflow = "hidden";
     body.style.paddingRight = `${scrollbarWidth}px`;
+
+    document.addEventListener("keydown", this.boundKeyHandler);
   },
   destroyed() {
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
+
+    document.removeEventListener("keydown", this.boundKeyHandler);
   },
   methods: {
-    handleClick(event) {
-      this.$emit("click", event);
+    handleClick() {
+      this.$emit("cancel");
+    },
+    handleKeyPress({ keyCode }) {
+      switch (keyCode) {
+        case KEYBOARD_CODES.enter:
+          this.$emit("confirm");
+          break;
+        case KEYBOARD_CODES.escape:
+          this.$emit("cancel");
+          break;
+        default:
+          return;
+      }
     }
   }
 };
