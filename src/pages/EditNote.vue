@@ -4,6 +4,9 @@
 
     <button @click="undo" :disabled="!canUndo">undo</button>
     <button @click="redo" :disabled="!canRedo">redo</button>
+    <button @click="save" :disabled="true">save</button>
+    <button @click="revert" :disabled="true">revert</button>
+    <button @click="remove" :disabled="true">remove</button>
   </div>
 </template>
 
@@ -40,6 +43,9 @@ export default {
     this.$store.dispatch("setNote", null);
   },
   methods: {
+    save() {},
+    revert() {},
+    remove() {},
     setNote() {
       const id = this.$route.params.id;
       const note = id === NEW_NOTE_KEY ? getNoteSchema() : this.getNoteById(id);

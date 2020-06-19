@@ -26,7 +26,7 @@ export default new Vuex.Store({
     SET_NOTES(state, notes) {
       state.notes = notes;
     },
-    DELETE_NOTE(state, id) {
+    REMOVE_NOTE(state, id) {
       const index = state.notes.findIndex(note => note.id === id);
 
       state.notes.splice(index, 1);
@@ -50,8 +50,8 @@ export default new Vuex.Store({
         commit("SET_NOTES", notes);
       }
     },
-    deleteNote({ commit }, { id }) {
-      commit("DELETE_NOTE", id);
+    removeNote({ commit }, { id }) {
+      commit("REMOVE_NOTE", id);
     },
     setNote({ commit }, note) {
       commit("SET_NOTE", note);

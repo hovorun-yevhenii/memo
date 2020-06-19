@@ -5,7 +5,7 @@
     @confirm="handleConfirm"
   >
     <div class="confirm__title">
-      Delete note
+      Remove note
       <span class="confirm__note-name">{{ note.title }}</span>
       ?
     </div>

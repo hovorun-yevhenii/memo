@@ -8,15 +8,15 @@
         :key="note.id"
         :note="note"
         @edit="handleEdit"
-        @delete="handleDelete"
+        @remove="handleRemove"
       />
     </transition-group>
 
     <confirm-modal
       v-if="showConfirmModal"
-      :note="noteToDelete"
+      :note="noteToRemove"
       @cancel="closeConfirmModal"
-      @confirm="confirmDelete"
+      @confirm="confirmRemove"
     />
   </div>
 </template>
@@ -31,37 +31,37 @@ export default {
   name: "NoteList",
   components: {
     NoteView,
-      NewNote,
+    NewNote,
     ConfirmModal
   },
   data() {
     return {
       showConfirmModal: false,
-      noteToDelete: null
+      noteToRemove: null
     };
   },
   computed: {
     ...mapGetters(["notes"])
   },
   methods: {
-    ...mapActions(["deleteNote"]),
+    ...mapActions(["removeNote"]),
     handleEdit({ id }) {
       this.$router.push({
         name: "note",
         params: { id }
       });
     },
-    handleDelete(note) {
-      this.noteToDelete = note;
+    handleRemove(note) {
+      this.noteToRemove = note;
       this.showConfirmModal = true;
     },
-    confirmDelete() {
-      this.deleteNote(this.noteToDelete);
+    confirmRemove() {
+      this.removeNote(this.noteToRemove);
       this.closeConfirmModal();
     },
     closeConfirmModal() {
       this.showConfirmModal = false;
-      this.noteToDelete = null;
+      this.noteToRemove = null;
     }
   }
 };

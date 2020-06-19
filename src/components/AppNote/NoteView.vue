@@ -6,7 +6,7 @@
       <note-view-actions
         :note="note"
         @edit="handleEdit"
-        @delete="handleDelete"
+        @remove="handleRemove"
       />
     </div>
 
@@ -31,7 +31,7 @@ export default {
   name: "NoteView",
   components: {
     IconButton,
-      NoteViewActions
+    NoteViewActions
   },
   props: {
     note: {
@@ -51,8 +51,8 @@ export default {
     handleEdit(note) {
       this.$emit("edit", note);
     },
-    handleDelete(note) {
-      this.$emit("delete", note);
+    handleRemove(note) {
+      this.$emit("remove", note);
     }
   }
 };

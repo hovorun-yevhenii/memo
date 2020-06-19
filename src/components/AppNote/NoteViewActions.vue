@@ -10,11 +10,11 @@
         @click="handleEdit"
       />
       <icon-button
-        class="actions__delete"
+        class="actions__remove"
         icon="delete_outline"
         type="danger"
-        title="Delete"
-        @click="handleDelete"
+        title="Remove"
+        @click="handleRemove"
       />
     </div>
   </div>
@@ -36,8 +36,8 @@ export default {
     handleEdit() {
       this.$emit("edit", this.note);
     },
-    handleDelete() {
-      this.$emit("delete", this.note);
+    handleRemove() {
+      this.$emit("remove", this.note);
     }
   }
 };
@@ -85,7 +85,7 @@ $padding: 18px;
       opacity: 1;
       top: $padding * 3;
     }
-    &__delete {
+    &__remove {
       opacity: 1;
       top: $padding * 5;
     }
