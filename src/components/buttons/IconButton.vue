@@ -64,7 +64,7 @@ export default {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  transition: background-color 0.35s;
+  transition: background-color $transition-duration;
   &.default *,
   &.checkbox * {
     color: $main-blue;

@@ -37,7 +37,7 @@ export default {
   font-size: 20px;
   font-family: $montserrat;
   opacity: 0.5;
-  transition: 0.25s ease;
+  transition: $transition-duration ease;
 
   cursor: pointer;
 
@@ -54,7 +54,7 @@ export default {
     margin-top: 16px;
     font-size: 72px;
     color: $dark-text;
-    transition: 0.25s ease;
+    transition: $transition-duration ease;
   }
 
   &:hover {

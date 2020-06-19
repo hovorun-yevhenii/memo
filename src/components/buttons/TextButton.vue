@@ -32,7 +32,7 @@ export default {
   text-align: center;
   font-size: 12px;
   font-weight: bold;
-  transition: 0.25s;
+  transition: $transition-duration;
 
   &.danger {
     background-color: rgba($danger-color, 0.7);

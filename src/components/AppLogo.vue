@@ -55,7 +55,7 @@ export default {
       fill: $main-green;
       stroke: $default-bg;
       transform-origin: center;
-      transition: transform 0.35s;
+      transition: transform $transition-duration;
     }
   }
 
