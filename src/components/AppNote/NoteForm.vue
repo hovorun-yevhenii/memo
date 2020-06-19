@@ -13,6 +13,12 @@
   </div>
 </template>
 
+<!-- edit title -->
+<!-- add item -->
+<!-- remove item -->
+<!-- edit item text -->
+<!-- check/uncheck item -->
+
 <script>
 export default {
   name: "NoteForm",

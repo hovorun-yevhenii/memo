@@ -4,9 +4,11 @@
 
     <button @click="handleUndo" :disabled="!canUndo">undo</button>
     <button @click="handleRedo" :disabled="!canRedo">redo</button>
+    <!-- todo compute possibility of saving -->
     <button @click="handleSave" :disabled="true">save</button>
+    <!-- todo compute possibility of reverting -->
     <button @click="handleRevert" :disabled="true">revert</button>
-    <button @click="handleRemove" :disabled="true">remove</button>
+    <button @click="handleRemove">remove</button>
   </div>
 </template>
 
