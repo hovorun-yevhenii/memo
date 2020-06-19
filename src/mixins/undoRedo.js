@@ -1,7 +1,5 @@
-import { MAX_MUTATION_STACK_SIZE } from "../constants";
+import { MAX_MUTATION_STACK_SIZE, EDIT } from "../constants";
 import { copyNote } from "../utils";
-
-const spyMutation = "UPDATE_EDITING_NOTE";
 
 export default {
   data() {
@@ -22,9 +20,9 @@ export default {
   },
   created() {
     this.$store.subscribe(mutation => {
-      if (mutation.type === spyMutation) {
+      if (mutation.type === EDIT) {
         const { type, payload } = mutation;
-
+        console.log(mutation)
         this.done.push({ type, payload: copyNote(payload) });
       }
       if (this.newMutation) {

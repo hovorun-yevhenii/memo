@@ -15,11 +15,11 @@ export default new Vuex.Store({
   plugins: [vuexLocal.plugin],
   state: {
     notes: [],
-    editingNote: {}
+    note: {}
   },
   getters: {
     notes: state => state.notes,
-    editingNote: state => state.editingNote,
+    note: state => state.note,
     getNoteById: state => id => state.notes.find(note => note.id === id)
   },
   mutations: {
@@ -31,11 +31,11 @@ export default new Vuex.Store({
 
       state.notes.splice(index, 1);
     },
-    SET_EDITING_NOTE(state, note) {
-      state.editingNote = copyNote(note);
+    SET_NOTE(state, note) {
+      state.note = copyNote(note);
     },
-    UPDATE_EDITING_NOTE(state, note) {
-      state.editingNote = note;
+    EDIT_NOTE(state, note) {
+      state.note = note;
     }
   },
   actions: {
@@ -53,11 +53,11 @@ export default new Vuex.Store({
     deleteNote({ commit }, { id }) {
       commit("DELETE_NOTE", id);
     },
-    setEditingNote({ commit }, note) {
-      commit("SET_EDITING_NOTE", note);
+    setNote({ commit }, note) {
+      commit("SET_NOTE", note);
     },
-    updateEditingNote({ commit }, note) {
-      commit("UPDATE_EDITING_NOTE", note);
+    editNote({ commit }, note) {
+      commit("EDIT_NOTE", note);
     }
   }
 });

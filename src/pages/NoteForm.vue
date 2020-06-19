@@ -1,12 +1,12 @@
 <template>
   <div class="form">
-    <input type="text" v-model="editingNote.title" />
-    <div>title: {{ editingNote.title }}</div>
+    <input type="text" v-model="note.title" />
+    <div>title: {{ note.title }}</div>
 
     <div>redo: {{ canRedo }}</div>
     <div>undo: {{ canUndo }}</div>
 
-    <div v-for="(item, index) in editingNote.items" :key="index">
+    <div v-for="(item, index) in note.items" :key="index">
       <input v-model="item.checked" type="checkbox" />
       <input v-model="item.text" spellcheck="false" placeholder="Enter text" />
     </div>
@@ -26,26 +26,26 @@ export default {
   name: "NoteForm",
   mixins: [undoRedo],
   computed: {
-    ...mapGetters(["getNoteById", "editingNote"])
+    ...mapGetters(["getNoteById", "note"])
   },
   watch: {
-    editingNote: {
+    note: {
       handler(note) {
-        this.$store.dispatch("updateEditingNote", note);
+        this.$store.dispatch("editNote", note);
       },
       deep: true
     }
   },
   created() {
-    this.setEditingNote();
+    this.setNote();
   },
   methods: {
-    setEditingNote() {
+    setNote() {
       const id = this.$route.params.id;
       const note = id === NEW_NOTE_KEY ? getNoteSchema() : this.getNoteById(id);
 
       if (note) {
-        this.$store.dispatch("setEditingNote", note);
+        this.$store.dispatch("setNote", note);
       } else {
         this.$router.push("/");
       }
