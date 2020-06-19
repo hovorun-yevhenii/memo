@@ -2,11 +2,11 @@
   <div class="form" v-if="note">
     <note-form v-model="note" />
 
-    <button @click="undo" :disabled="!canUndo">undo</button>
-    <button @click="redo" :disabled="!canRedo">redo</button>
-    <button @click="save" :disabled="true">save</button>
-    <button @click="revert" :disabled="true">revert</button>
-    <button @click="remove" :disabled="true">remove</button>
+    <button @click="handleUndo" :disabled="!canUndo">undo</button>
+    <button @click="handleRedo" :disabled="!canRedo">redo</button>
+    <button @click="handleSave" :disabled="true">save</button>
+    <button @click="handleRevert" :disabled="true">revert</button>
+    <button @click="handleRemove" :disabled="true">remove</button>
   </div>
 </template>
 
@@ -43,9 +43,9 @@ export default {
     this.$store.dispatch("setNote", null);
   },
   methods: {
-    save() {},
-    revert() {},
-    remove() {},
+    handleSave() {},
+    handleRevert() {},
+    handleRemove() {},
     setNote() {
       const id = this.$route.params.id;
       const note = id === NEW_NOTE_KEY ? getNoteSchema() : this.getNoteById(id);

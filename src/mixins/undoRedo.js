@@ -31,10 +31,10 @@ export default {
     });
   },
   methods: {
-    redo() {
+    handleUndo() {
     },
 
-    undo() {
+    handleRedo() {
     }
   }
 };
