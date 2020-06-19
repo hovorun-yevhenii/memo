@@ -78,8 +78,8 @@ $padding: 18px;
   }
 
   &:hover & {
-    &__more {
-      opacity: 0.5;
+    &__more:hover {
+      background-color: transparent;
     }
     &__edit {
       opacity: 1;
