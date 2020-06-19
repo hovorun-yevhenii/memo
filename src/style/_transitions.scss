@@ -1,3 +1,6 @@
+@import "variables";
+
+//---------- MODAL ----------
 @keyframes dialog-enter {
   from {
     transform: translate3d(0, -72px, 0);
@@ -5,7 +8,7 @@
 }
 
 .dialog-enter-active {
-  animation: dialog-enter .3s both cubic-bezier(0.4, 0, 0, 1.5);
+  animation: dialog-enter $transition-duration both cubic-bezier(0.4, 0, 0, 1.5);
 }
 
 .modal-enter,
@@ -13,18 +16,16 @@
   opacity: 0;
 }
 
+.modal-leave-active,
 .modal-enter-active {
-  transition: 0.3s;
-}
-
-.modal-leave-active {
-  transition: 0.3s;
+  transition: $transition-duration;
 }
 
 
-.page-enter-active,
-.page-leave-active {
-  transition: 0.35s ease;
+//---------- PAGE ----------
+.page-leave-active,
+.page-enter-active {
+  transition: $transition-duration;
 }
 
 .page-enter,
@@ -32,32 +33,23 @@
   opacity: 0;
 }
 
-.page-leave-to {
-  transform: scale(0.9);
-}
-
 .page-enter {
-  transform: scale(1.1);
+  transform: translateY(-20px);
 }
 
-
-//.moda-body-bodyenter,
-//.moda-body-bodyleave-to {
-//  opacity: 0;
-//}
-//
-//.moda-body-bodyenter,
-//.moda-body-bodyleave-to {
-//  transform: scale(1.3);
-//}
-
-
-.list-enter-active,
-.list-leave-active {
-  transition: 0.35s ease;
+.page-leave-to {
+  transform: translateY(20px);
 }
 
-.list-enter,
-.list-leave-to {
-  transform: scale(0.5);
+//---------- LIST ----------
+.list-enter-active, .list-leave-active {
+  position: absolute;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: scaleY(0.5);
+}
+
+.list-move {
+  transition: $transition-duration;
 }
