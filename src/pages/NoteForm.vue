@@ -1,5 +1,5 @@
 <template>
-  <div class="form">
+  <div class="form" v-if="note">
     <input type="text" v-model="note.title" />
     <div>title: {{ note.title }}</div>
 
@@ -30,14 +30,19 @@ export default {
   },
   watch: {
     note: {
-      handler(note) {
-        this.$store.dispatch("editNote", note);
+      handler(note, hasInitialValue) {
+        if (hasInitialValue) {
+          this.$store.dispatch("editNote", note);
+        }
       },
       deep: true
     }
   },
   created() {
     this.setNote();
+  },
+  beforeDestroy() {
+    this.$store.dispatch("setNote", null);
   },
   methods: {
     setNote() {

@@ -37,9 +37,15 @@ const getNoteSchema = () => ({
   ]
 });
 
-const copyNote = note => ({
-  ...note,
-  items: note.items.map(item => ({ ...item }))
-});
+const copyNote = note => {
+  if (note) {
+    return {
+      ...note,
+      items: note.items.map(item => ({ ...item }))
+    };
+  } else {
+    return null;
+  }
+};
 
 export { copyNote, createTestNotes, getNoteSchema };

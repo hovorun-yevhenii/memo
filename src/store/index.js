@@ -15,7 +15,7 @@ export default new Vuex.Store({
   plugins: [vuexLocal.plugin],
   state: {
     notes: [],
-    note: {}
+    note: null
   },
   getters: {
     notes: state => state.notes,
