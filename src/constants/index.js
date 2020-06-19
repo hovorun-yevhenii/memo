@@ -4,6 +4,8 @@ const VUEX_PERSIST_KEY = "memoNotes";
 
 const NEW_NOTE_KEY = "new";
 
+const MAX_MUTATION_STACK_SIZE = 512;
+
 const KEYBOARD_CODES = {
   enter: 13,
   escape: 27
@@ -13,5 +15,6 @@ export {
   NEW_NOTE_KEY,
   LIST_VIEW_ITEMS_COUNT,
   VUEX_PERSIST_KEY,
-  KEYBOARD_CODES
+  KEYBOARD_CODES,
+  MAX_MUTATION_STACK_SIZE
 };

@@ -1,55 +1,54 @@
 <template>
   <div class="form">
-    <input type="text" v-model="tempNote.title" />
-    <div>title: {{ tempNote.title }}</div>
+    <input type="text" v-model="editingNote.title" />
+    <div>title: {{ editingNote.title }}</div>
 
     <div>redo: {{ canRedo }}</div>
     <div>undo: {{ canUndo }}</div>
 
-    <div v-for="(item, index) in tempNote.items" :key="index">
+    <div v-for="(item, index) in editingNote.items" :key="index">
       <input v-model="item.checked" type="checkbox" />
       <input v-model="item.text" spellcheck="false" placeholder="Enter text" />
     </div>
 
-    <button @click="handleUndo" :disabled="!canUndo">undo</button>
-    <button @click="handleRedo" :disabled="!canRedo">redo</button>
+    <button @click="undo" :disabled="!canUndo">undo</button>
+    <button @click="redo" :disabled="!canRedo">redo</button>
   </div>
 </template>
 
 <script>
+import undoRedo from "../mixins/undoRedo";
 import { mapGetters } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
 import { getNoteSchema } from "../utils";
 
 export default {
   name: "NoteForm",
+  mixins: [undoRedo],
   computed: {
-    ...mapGetters(["getNoteById", "tempNote"])
+    ...mapGetters(["getNoteById", "editingNote"])
   },
   watch: {
-    tempNote: {
+    editingNote: {
       handler(note) {
-        this.$store.dispatch("updateTempNote", note);
+        this.$store.dispatch("updateEditingNote", note);
       },
       deep: true
     }
   },
   created() {
-    const id = this.$route.params.id;
-    const note = id === NEW_NOTE_KEY ? getNoteSchema() : this.getNoteById(id);
-
-    if (note) {
-      this.$store.dispatch("setTempNote", note);
-    } else {
-      this.$router.push("/");
-    }
+    this.setEditingNote();
   },
   methods: {
-    handleUndo() {
-      this.undo();
-    },
-    handleRedo() {
-      this.redo();
+    setEditingNote() {
+      const id = this.$route.params.id;
+      const note = id === NEW_NOTE_KEY ? getNoteSchema() : this.getNoteById(id);
+
+      if (note) {
+        this.$store.dispatch("setEditingNote", note);
+      } else {
+        this.$router.push("/");
+      }
     }
   }
 };

@@ -68,6 +68,7 @@ export default {
   display: flex;
   padding: 8px;
   background-color: rgba(black, 0.8);
+  z-index: 9;
 
   &__body {
     padding: 16px 32px;
