@@ -3,7 +3,7 @@
     <div class="note__header">
       <div class="note__title">{{ note.title }}</div>
 
-      <note-view-actions
+      <note-card-actions
         :note="note"
         @edit="handleEdit"
         @remove="handleRemove"
@@ -11,9 +11,7 @@
     </div>
 
     <div v-for="(item, index) in itemsToDisplay" :key="index" class="todo">
-      <div class="todo__checkbox">
-        <icon-button type="checkbox" :checked="item.checked" />
-      </div>
+      <app-checkbox class="todo__checkbox" v-model="item.checked" />
       <div class="todo__text">{{ item.text }}</div>
     </div>
     <div v-if="restItemsCount" class="todo__rest">
@@ -23,15 +21,15 @@
 </template>
 
 <script>
-import IconButton from "../buttons/IconButton.vue";
-import NoteViewActions from "./NoteViewActions.vue";
+import AppCheckbox from "../AppCheckbox.vue";
+import NoteCardActions from "./NoteCardActions.vue";
 import { LIST_VIEW_ITEMS_COUNT } from "../../constants";
 
 export default {
-  name: "NoteView",
+  name: "NoteCard",
   components: {
-    IconButton,
-    NoteViewActions
+    AppCheckbox,
+    NoteCardActions
   },
   props: {
     note: {
@@ -101,8 +99,10 @@ export default {
     padding-top: 11px;
     font-size: 14px;
     color: $dark-text;
+    word-break: break-word;
   }
   &__checkbox {
+    flex-shrink: 0;
     margin-right: 4px;
   }
   &__rest {

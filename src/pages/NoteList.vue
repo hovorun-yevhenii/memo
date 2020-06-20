@@ -1,9 +1,9 @@
 <template>
   <div>
     <transition-group tag="div" name="list" class="list">
-      <new-note key="new-note" />
+      <new-note-card key="new-note" />
 
-      <note-view
+      <note-card
         v-for="note in notes"
         :key="note.id"
         :note="note"
@@ -22,16 +22,16 @@
 </template>
 
 <script>
-import NoteView from "../components/AppNote/NoteView.vue";
-import NewNote from "../components/AppNote/NewNote.vue";
+import NoteCard from "../components/AppNote/NoteCard.vue";
+import NewNoteCard from "../components/AppNote/NewNoteCard.vue";
 import ConfirmModal from "../components/modals/ConfirmModal.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "NoteList",
   components: {
-    NoteView,
-    NewNote,
+    NoteCard,
+    NewNoteCard,
     ConfirmModal
   },
   data() {

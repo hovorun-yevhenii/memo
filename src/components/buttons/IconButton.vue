@@ -7,13 +7,7 @@
   <!--    redo-->
   <!--    more_horiz-->
   <button class="icon-button" :class="type" :title="title" @click="handleClick">
-    <i v-if="isCheckbox && checked" class="material-icons">
-      check_circle_outline
-    </i>
-    <i v-if="isCheckbox && !checked" class="material-icons">
-      panorama_fish_eye
-    </i>
-    <i v-else class="material-icons">{{ icon }}</i>
+    <i class="material-icons">{{ icon }}</i>
   </button>
 </template>
 
@@ -31,15 +25,6 @@ export default {
     type: {
       type: String,
       default: "default"
-    },
-    checked: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: {
-    isCheckbox() {
-      return this.type === "checkbox";
     }
   },
   methods: {

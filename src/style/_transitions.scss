@@ -53,3 +53,22 @@
 .list-move {
   transition: $transition-duration;
 }
+
+//---------- CHECKBOX ----------
+.checkbox-leave-active,
+.checkbox-enter-active {
+  transition: $transition-duration;
+}
+
+.checkbox-enter,
+.checkbox-leave-to {
+  opacity: 1;
+}
+
+.checkbox-enter {
+  transform: rotateY(90deg);
+}
+
+.checkbox-leave-to {
+  transform: rotateY(-90deg);
+}

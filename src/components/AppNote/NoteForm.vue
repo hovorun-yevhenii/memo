@@ -3,7 +3,8 @@
     <input type="text" v-model="note.title" />
 
     <div v-for="(_, index) in note.items" :key="index">
-      <input v-model="note.items[index].checked" type="checkbox" />
+      <app-checkbox v-model="note.items[index].checked" />
+
       <input
         v-model="note.items[index].text"
         spellcheck="false"
@@ -20,8 +21,15 @@
 <!-- check/uncheck item -->
 
 <script>
+import AppCheckbox from "../AppCheckbox";
+// import IconButton from "../buttons/IconButton.vue";
+
 export default {
   name: "NoteForm",
+  components: {
+    AppCheckbox,
+    // IconButton
+  },
   props: {
     value: {
       type: Object,
