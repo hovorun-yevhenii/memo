@@ -1,7 +1,11 @@
 <template>
   <div class="form">
     <div class="form__title">
-      <text-area v-model="note.title" :max-length="MAX_NOTE_TITLE_LENGTH" />
+      <text-area
+        v-model="note.title"
+        :max-length="MAX_NOTE_TITLE_LENGTH"
+        placeholder="Type note title here..."
+      />
     </div>
 
     <div class="form__todo" v-for="(_, index) in note.items" :key="index">
@@ -13,6 +17,7 @@
         class="form__todo-text"
         v-model="note.items[index].text"
         :max-length="MAX_TODO_TEXT_LENGTH"
+        placeholder="Type todo here..."
       />
     </div>
   </div>
@@ -59,5 +64,21 @@ export default {
 @import "../../style/variables";
 
 .form {
+  margin-bottom: 32px;
+  &__title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  &__todo {
+    display: flex;
+  }
+  &__todo-checkbox {
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+  &__todo-text {
+    padding-top: 11px;
+  }
 }
 </style>

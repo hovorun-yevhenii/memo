@@ -4,6 +4,7 @@
     spellcheck="false"
     v-once
     v-text="value"
+    :data-placeholder="placeholder"
     @input="handleInput"
   ></div>
 </template>
@@ -19,6 +20,10 @@ export default {
     maxLength: {
       type: Number,
       default: 64
+    },
+    placeholder: {
+      type: String,
+      default: ""
     }
   },
   watch: {
@@ -68,6 +73,10 @@ export default {
 @import "../../style/variables";
 
 div {
+  &.empty {
+    background-color: #fa0;
+  }
+  background-color: plum;
   &:hover {
     outline: 1px dashed;
   }

@@ -47,6 +47,7 @@ export default {
   width: 36px;
   height: 36px;
   cursor: pointer;
+  user-select: none;
   & * {
     & {
       color: $main-blue;

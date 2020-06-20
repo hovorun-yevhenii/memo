@@ -73,6 +73,7 @@ export default {
   button {
     @include empty-button;
     padding: 8px;
+    margin-right: 16px;
     border-radius: 4px;
     border: 1px solid $border-color;
     &:disabled {
@@ -81,7 +82,7 @@ export default {
   }
 
   @media (max-width: $breakpoint-desktop) {
-    padding: 8px;
+    padding: 32px 16px;
     margin: 0;
     border: none;
   }
