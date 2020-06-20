@@ -1,65 +1,13 @@
 <template>
-  <div class="form">
-    <text-area v-model="note.title" />
-
-    <div v-for="(_, index) in note.items" :key="index">
-      <app-checkbox v-model="note.items[index].checked" />
-
-      <input
-        v-model="note.items[index].text"
-        spellcheck="false"
-        placeholder="Enter text"
-      />
-    </div>
-  </div>
+$END$
 </template>
 
-<!-- edit title -->
-<!-- add item -->
-<!-- remove item -->
-<!-- edit item text -->
-<!-- check/uncheck item -->
-
 <script>
-import AppCheckbox from "../common/AppCheckbox";
-import TextArea from "../common/TextArea";
-// import IconButton from "../common/IconButton.vue";
-
 export default {
-  name: "NoteForm",
-  components: {
-    AppCheckbox,
-    TextArea
-    // IconButton
-  },
-  props: {
-    value: {
-      type: Object,
-      default: () => ({})
-    }
-  },
-  computed: {
-    note: {
-      get() {
-        return this.value;
-      },
-      set(note) {
-        this.$emit("input", note);
-      }
-    }
-  }
-};
+name: "NoteForm"
+}
 </script>
 
-<style lang="scss" scoped>
-@import "../../style/variables";
+<style scoped>
 
-.form {
-  padding: 12px;
-  background-color: $default-bg;
-
-  input {
-    background-color: transparent;
-  }
-}
 </style>
