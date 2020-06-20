@@ -1,12 +1,10 @@
 <template>
-  <div class="form" v-if="note">
-    <note-form v-model="note" />
+  <div class="edit-note" v-if="editingNote">
+    <note-form v-model="editingNote" />
 
     <button @click="handleUndo" :disabled="!canUndo">undo</button>
     <button @click="handleRedo" :disabled="!canRedo">redo</button>
-    <!-- todo compute possibility of saving -->
     <button @click="handleSave" :disabled="true">save</button>
-    <!-- todo compute possibility of reverting -->
     <button @click="handleRevert" :disabled="true">revert</button>
     <button @click="handleRemove">remove</button>
   </div>
@@ -26,13 +24,13 @@ export default {
     NoteForm
   },
   computed: {
-    ...mapGetters(["getNoteById", "note"])
+    ...mapGetters(["getNoteById", "editingNote"])
   },
   watch: {
-    note: {
+    editingNote: {
       handler(note, oldValue) {
         if (oldValue) {
-          this.$store.dispatch("editNote", note);
+          this.$store.commit("EDIT_NOTE", note);
         }
       },
       deep: true
@@ -42,7 +40,7 @@ export default {
     this.setNote();
   },
   beforeDestroy() {
-    this.$store.dispatch("setNote", null);
+    this.$store.commit("SET_EDITING_NOTE", null);
   },
   methods: {
     handleSave() {},
@@ -53,7 +51,7 @@ export default {
       const note = id === NEW_NOTE_KEY ? getNoteSchema() : this.getNoteById(id);
 
       if (note) {
-        this.$store.dispatch("setNote", note);
+        this.$store.commit("SET_EDITING_NOTE", note);
       } else {
         this.$router.push("/");
       }
@@ -66,8 +64,11 @@ export default {
 @import "../style/variables";
 @import "../style/mixins";
 
-.form {
+.edit-note {
   padding: 32px;
+  margin: 32px 0;
+  background-color: $default-bg;
+  border: 1px solid $border-color;
 
   button {
     @include empty-button;
@@ -79,8 +80,10 @@ export default {
     }
   }
 
-  @media (max-width: $breakpoint-phone) {
-    padding: 16px;
+  @media (max-width: $breakpoint-desktop) {
+    padding: 8px;
+    margin: 0;
+    border: none;
   }
 }
 </style>

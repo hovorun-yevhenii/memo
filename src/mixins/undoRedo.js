@@ -1,4 +1,4 @@
-import { MAX_MUTATION_STACK_SIZE, EDIT } from "../constants";
+import { MAX_MUTATION_STACK_SIZE, EDIT_NOTE_MUTATION } from "../constants";
 import { copyNote } from "../utils";
 
 export default {
@@ -7,6 +7,7 @@ export default {
       done: [],
       undone: [],
       newMutation: true,
+      unsubscribe: null,
       MAX_MUTATION_STACK_SIZE
     };
   },
@@ -19,8 +20,8 @@ export default {
     }
   },
   created() {
-    this.$store.subscribe(mutation => {
-      if (mutation.type === EDIT) {
+    this.unsubscribe = this.$store.subscribe(mutation => {
+      if (mutation.type === EDIT_NOTE_MUTATION) {
         const { type, payload } = mutation;
 
         this.done.push({ type, payload: copyNote(payload) });
@@ -29,6 +30,9 @@ export default {
         this.undone = [];
       }
     });
+  },
+  beforeDestroy() {
+    this.unsubscribe();
   },
   methods: {
     handleUndo() {

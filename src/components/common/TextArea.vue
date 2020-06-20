@@ -18,7 +18,7 @@ export default {
     },
     maxLength: {
       type: Number,
-      default: 5
+      default: 64
     }
   },
   watch: {
@@ -68,8 +68,9 @@ export default {
 @import "../../style/variables";
 
 div {
-  max-width: 100px;
-  outline: 1px dashed;
+  &:hover {
+    outline: 1px dashed;
+  }
   &:focus {
     outline: 1px solid;
   }
