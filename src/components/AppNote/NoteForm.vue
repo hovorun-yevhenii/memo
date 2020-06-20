@@ -1,6 +1,6 @@
 <template>
   <div class="form">
-    <input type="text" v-model="note.title" />
+    <text-area v-model="note.title" />
 
     <div v-for="(_, index) in note.items" :key="index">
       <app-checkbox v-model="note.items[index].checked" />
@@ -21,13 +21,15 @@
 <!-- check/uncheck item -->
 
 <script>
-import AppCheckbox from "../AppCheckbox";
-// import IconButton from "../buttons/IconButton.vue";
+import AppCheckbox from "../common/AppCheckbox";
+import TextArea from "../common/TextArea";
+// import IconButton from "../common/IconButton.vue";
 
 export default {
   name: "NoteForm",
   components: {
     AppCheckbox,
+    TextArea
     // IconButton
   },
   props: {

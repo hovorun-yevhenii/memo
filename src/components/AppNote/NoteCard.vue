@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import AppCheckbox from "../AppCheckbox.vue";
+import AppCheckbox from "../common/AppCheckbox.vue";
 import NoteCardActions from "./NoteCardActions.vue";
 import { LIST_VIEW_ITEMS_COUNT } from "../../constants";
 

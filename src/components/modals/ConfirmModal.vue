@@ -18,7 +18,7 @@
 
 <script>
 import ModalWrapper from "./ModalWrapper.vue";
-import TextButton from "../buttons/TextButton.vue";
+import TextButton from "../common/TextButton.vue";
 
 export default {
   name: "ConfirmModal",

@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../style/variables";
+@import "../../style/variables";
 
 .checkbox {
   display: inline-flex;
