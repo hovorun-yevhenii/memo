@@ -34,7 +34,7 @@ export default {
     font-family: $roboto;
     color: $main-text;
     &::selection {
-      background-color: rgba($main-green, 0.35);
+      background-color: rgba($accent-color, 0.35);
     }
   }
 }

@@ -1,12 +1,18 @@
 <template>
-  <button class="button" :class="type" v-text="text" @click="handleClick" />
+  <button
+    class="button"
+    :class="color"
+    v-text="text"
+    type="button"
+    @click="handleClick"
+  />
 </template>
 
 <script>
 export default {
   name: "TextButton",
   props: {
-    type: {
+    color: {
       type: String,
       default: ""
     },
@@ -44,12 +50,12 @@ export default {
     border-color: darken($danger-color, 20%);
   }
   &.primary {
-    background-color: rgba($main-blue, 0.7);
-    border-color: darken($main-blue, 20%);
+    background-color: rgba($primary-color, 0.7);
+    border-color: darken($primary-color, 20%);
   }
   &.accent {
-    background-color: rgba($main-green, 0.7);
-    border-color: darken($main-green, 20%);
+    background-color: rgba($accent-color, 0.7);
+    border-color: darken($accent-color, 20%);
   }
   &:hover {
     filter: brightness(1.25);

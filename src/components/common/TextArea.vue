@@ -124,8 +124,6 @@ export default {
   &__field {
     flex-grow: 1;
     padding: 7px 9px;
-    margin-right: 4px;
-    border-radius: 4px;
     line-height: 1.3;
     word-break: break-word;
     transition: border $transition-duration / 2;
@@ -133,7 +131,7 @@ export default {
       outline: 1px dashed $border-color;
     }
     &:focus {
-      outline: 1px solid $main-blue;
+      outline: 1px solid $primary-color;
     }
     &:before {
       display: none;
@@ -158,7 +156,6 @@ export default {
     visibility: hidden;
     opacity: 0;
     flex-shrink: 0;
-    width: 40px;
     font-size: 10px;
     color: $dark-text;
     font-weight: 400;
@@ -179,12 +176,12 @@ export default {
 
   &__error {
     position: absolute;
+    top: calc(100% + 2px);
     padding: 4px 16px;
     border-radius: 4px;
     background-color: $danger-color;
     font-weight: 400;
     font-size: 12px;
-    top: calc(100% + 2px);
     z-index: 1;
   }
 }

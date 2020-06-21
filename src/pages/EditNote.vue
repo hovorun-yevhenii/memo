@@ -5,25 +5,23 @@
     <div class="edit-note__actions">
       <div>
         <text-button
-          type="default"
           text="undo"
           :disabled="!canUndo"
           @click="handleUndo"
         />
 
         <text-button
-          type="default"
           text="redo"
           :disabled="!canRedo"
           @click="handleRedo"
         />
 
-        <text-button type="primary" text="revert" @click="handleRevert" />
+        <text-button color="primary" text="revert" @click="handleRevert" />
       </div>
 
       <div>
-        <text-button type="danger" text="delete" @click="handleRemove" />
-        <text-button type="accent" text="save" @click="handleSave" />
+        <text-button color="danger" text="delete" @click="handleRemove" />
+        <text-button color="accent" text="save" @click="handleSave" />
       </div>
     </div>
   </div>
@@ -93,8 +91,6 @@ export default {
 @import "../style/mixins";
 
 .edit-note {
-  margin: 32px 0;
-
   &__actions {
     display: flex;
     flex-wrap: wrap;
@@ -103,7 +99,7 @@ export default {
     padding: 32px 0;
     margin: 0 auto;
     * {
-      margin: 8px;
+      margin: 8px 8px 0 8px;
     }
     button {
       @include empty-button;
@@ -116,9 +112,8 @@ export default {
     }
   }
 
-  @media (max-width: $breakpoint-desktop) {
-    margin: 0;
-    border: none;
+  @media (max-width: $breakpoint-phone) {
+
   }
 }
 </style>

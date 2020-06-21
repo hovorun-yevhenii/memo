@@ -63,7 +63,7 @@ export default {
     opacity: 1;
     .material-icons {
       transform: scale(1.1);
-      color: $success-color;
+      color: $accent-color;
     }
   }
 }

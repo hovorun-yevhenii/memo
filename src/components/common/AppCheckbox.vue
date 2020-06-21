@@ -48,15 +48,15 @@ export default {
   user-select: none;
   & * {
     & {
-      color: $main-blue;
+      color: $primary-color;
     }
     &.checked {
-      color: $main-green;
+      color: $accent-color;
     }
   }
 
   &:focus-within {
-    outline: 1px solid $main-blue;
+    outline: 1px solid $primary-color;
   }
 
   &__icon {

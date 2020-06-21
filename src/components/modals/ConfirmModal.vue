@@ -11,7 +11,7 @@
     </div>
     <div class="confirm__actions">
       <text-button @click="handleCancel" text="cancel" />
-      <text-button type="danger" @click="handleConfirm" text="confirm" />
+      <text-button color="danger" @click="handleConfirm" text="confirm" />
     </div>
   </modal-wrapper>
 </template>
@@ -52,7 +52,7 @@ export default {
   }
 
   &__note-name {
-    color: $main-blue;
+    color: $primary-color;
   }
 
   &__actions {

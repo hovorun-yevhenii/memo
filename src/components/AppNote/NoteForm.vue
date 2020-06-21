@@ -22,12 +22,21 @@
         placeholder="Type todo text here..."
       />
     </div>
+
+    <icon-button
+      class="form__add-todo"
+      icon="add_circle_outline"
+      color="accent"
+      title="Add todo item"
+      @click="addTodoItem"
+    />
   </form>
 </template>
 
 <script>
 import AppCheckbox from "../common/AppCheckbox";
 import TextArea from "../common/TextArea";
+import IconButton from "../common/IconButton";
 import { MAX_NOTE_TITLE_LENGTH, MAX_TODO_TEXT_LENGTH } from "../../constants";
 import { getNoteSchema } from "../../utils";
 
@@ -35,7 +44,8 @@ export default {
   name: "NoteForm",
   components: {
     AppCheckbox,
-    TextArea
+    TextArea,
+    IconButton
   },
   props: {
     value: {
@@ -61,6 +71,11 @@ export default {
     }
   },
   methods: {
+    addTodoItem() {
+      this.note.items.push({
+        checked: true
+      })
+    },
     validate() {
       return new Promise(resolve => {
         resolve(this.$refs.title.validate());
@@ -76,9 +91,10 @@ export default {
 .form {
   background-color: $default-bg;
   border: 1px solid $border-color;
+  max-width: $breakpoint-phone;
+  margin: 48px auto 0;
   padding: 32px 16px;
-  max-width: 500px;
-  margin: 0 auto;
+  box-sizing: border-box;
   &__title {
     margin-bottom: 24px;
     font-size: 18px;
@@ -86,13 +102,20 @@ export default {
   }
   &__todo {
     display: flex;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   &__todo-checkbox {
     flex-shrink: 0;
   }
   &__todo-text {
     flex-grow: 1;
+  }
+
+  @media (max-width: $breakpoint-phone) {
+    margin: 0;
+    border-top: none;
+    border-right: none;
+    border-left: none;
   }
 }
 </style>

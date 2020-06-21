@@ -5,14 +5,14 @@
       <icon-button
         class="actions__edit"
         icon="create"
-        type="success"
+        color="accent"
         title="Edit"
         @click="handleEdit"
       />
       <icon-button
         class="actions__remove"
         icon="delete_outline"
-        type="danger"
+        color="danger"
         title="Remove"
         @click="handleRemove"
       />

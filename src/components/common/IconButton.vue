@@ -1,5 +1,11 @@
 <template>
-  <button class="icon-button" :class="type" :title="title" @click="handleClick">
+  <button
+    class="icon-button"
+    :class="color"
+    :title="title"
+    type="button"
+    @click="handleClick"
+  >
     <i class="material-icons">{{ icon }}</i>
   </button>
 </template>
@@ -15,7 +21,7 @@ export default {
       type: String,
       default: ""
     },
-    type: {
+    color: {
       type: String,
       default: "default"
     }
@@ -43,15 +49,16 @@ export default {
   height: 36px;
   border-radius: 50%;
   transition: background-color $transition-duration;
-  &.default *,
-  &.checkbox * {
-    color: $main-blue;
+
+  & * {
+    color: $primary-color;
   }
+
   &.danger * {
     color: $danger-color;
   }
-  &.success * {
-    color: $success-color;
+  &.accent * {
+    color: $accent-color;
   }
   &:hover {
     background-color: rgba(black, 0.7);
