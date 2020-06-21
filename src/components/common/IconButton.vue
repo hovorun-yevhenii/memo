@@ -1,11 +1,4 @@
 <template>
-  <!--    add_circle_outline-->
-  <!--    delete_outline-->
-  <!--    create === edit-->
-  <!--    save-->
-  <!--    undo-->
-  <!--    redo-->
-  <!--    more_horiz-->
   <button class="icon-button" :class="type" :title="title" @click="handleClick">
     <i class="material-icons">{{ icon }}</i>
   </button>

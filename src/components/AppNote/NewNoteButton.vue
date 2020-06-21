@@ -1,15 +1,15 @@
 <template>
-  <div class="new-note" @click="handleClick">
+  <button class="new-note" @click="handleClick">
     Create new note
     <i class="material-icons">add_circle_outline</i>
-  </div>
+  </button>
 </template>
 
 <script>
 import { NEW_NOTE_KEY } from "../../constants";
 
 export default {
-  name: "NewNoteCard",
+  name: "NewNoteButton",
   methods: {
     handleClick() {
       this.$router.push({
@@ -23,8 +23,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../style/variables";
+@import "../../style/mixins";
 
 .new-note {
+  @include empty-button;
   display: flex;
   flex-direction: column;
   align-items: center;

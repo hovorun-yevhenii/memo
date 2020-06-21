@@ -1,7 +1,7 @@
 <template>
-  <label class="checkbox">
+  <label class="checkbox" @keypress.enter="checked = !checked">
     <transition name="checkbox" mode="out-in">
-      <span :key="checked">
+      <span class="checkbox__icon" :key="checked">
         <i v-if="checked" class="material-icons checked">
           check_circle_outline
         </i>
@@ -41,9 +41,7 @@ export default {
 @import "../../style/variables";
 
 .checkbox {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   width: 36px;
   height: 36px;
   cursor: pointer;
@@ -57,8 +55,26 @@ export default {
     }
   }
 
+  &:focus-within {
+    outline: 1px solid $main-blue;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    margin: auto;
+    flex-grow: 1;
+  }
+
   &__input {
-    display: none;
+    width: 0;
+    height: 0;
+    opacity: 0;
   }
 }
 </style>

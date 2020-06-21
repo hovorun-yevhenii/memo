@@ -1,7 +1,5 @@
 <template>
-  <button class="button" :class="type" v-text="text" @click="handleClick">
-    <slot></slot>
-  </button>
+  <button class="button" :class="type" v-text="text" @click="handleClick" />
 </template>
 
 <script>
@@ -44,6 +42,14 @@ export default {
   &.danger {
     background-color: rgba($danger-color, 0.7);
     border-color: darken($danger-color, 20%);
+  }
+  &.primary {
+    background-color: rgba($main-blue, 0.7);
+    border-color: darken($main-blue, 20%);
+  }
+  &.accent {
+    background-color: rgba($main-green, 0.7);
+    border-color: darken($main-green, 20%);
   }
   &:hover {
     filter: brightness(1.25);

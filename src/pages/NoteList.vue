@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition-group tag="div" name="list" class="list">
-      <new-note-card key="new-note" />
+      <new-note-button key="new-note" />
 
       <note-card
         v-for="note in notes"
@@ -23,7 +23,7 @@
 
 <script>
 import NoteCard from "../components/AppNote/NoteCard.vue";
-import NewNoteCard from "../components/AppNote/NewNoteCard.vue";
+import NewNoteButton from "../components/AppNote/NewNoteButton.vue";
 import ConfirmModal from "../components/modals/ConfirmModal.vue";
 import { mapGetters, mapActions } from "vuex";
 
@@ -31,7 +31,7 @@ export default {
   name: "NoteList",
   components: {
     NoteCard,
-    NewNoteCard,
+    NewNoteButton,
     ConfirmModal
   },
   data() {

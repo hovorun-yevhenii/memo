@@ -1,8 +1,10 @@
+@import "variables";
+
 @mixin empty-button {
   border: none;
   background-color: transparent;
   cursor: pointer;
   &:focus {
-    outline: none;
+    outline: 1px solid $main-blue;
   }
 }

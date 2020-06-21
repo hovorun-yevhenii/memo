@@ -1,16 +1,26 @@
 <template>
-  <div class="text-area" :class="{ 'text-area--empty': value.length === 0 }">
+  <div
+    :class="{
+      'text-area': true,
+      'text-area--empty': value.length === 0,
+      'text-area--has-error': hasError
+    }"
+  >
     <div
       contenteditable="true"
       spellcheck="false"
       class="text-area__field"
+      :data-placeholder="placeholder"
       ref="input"
       v-once
       v-text="value"
-      :data-placeholder="placeholder"
+      v-on="required ? { focus: handleFocus } : {}"
       @input="handleInput"
     ></div>
     <div class="text-area__count">{{ value.length }}/{{ maxLength }}</div>
+    <transition name="dialog">
+      <div v-if="hasError" class="text-area__error">Field is required</div>
+    </transition>
   </div>
 </template>
 
@@ -35,7 +45,16 @@ export default {
     autofocus: {
       type: Boolean,
       default: false
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
+  },
+  data() {
+    return {
+      hasError: false
+    };
   },
   watch: {
     value(newValue) {
@@ -63,6 +82,14 @@ export default {
         this.$emit("input", value);
       }
     },
+    handleFocus() {
+      this.hasError = false;
+    },
+    validate() {
+      this.hasError = this.value.length === 0;
+
+      return !this.hasError;
+    },
     getCaretPosition() {
       const selection = window.getSelection();
       const range = selection.getRangeAt(0);
@@ -79,7 +106,7 @@ export default {
         selection.removeAllRanges();
         selection.addRange(range);
       } catch (_) {
-        this.setCaretPosition(this.value.length + 1);
+        this.$refs.input.focus();
       }
     }
   }
@@ -90,24 +117,23 @@ export default {
 @import "../../style/variables";
 
 .text-area {
+  position: relative;
   display: flex;
   align-items: flex-end;
 
   &__field {
     flex-grow: 1;
     padding: 7px 9px;
-    margin-right: 44px;
-    border: 1px solid transparent;
+    margin-right: 4px;
     border-radius: 4px;
     line-height: 1.3;
+    word-break: break-word;
     transition: border $transition-duration / 2;
     &:hover {
-      border: 1px dashed $border-color;
+      outline: 1px dashed $border-color;
     }
     &:focus {
-      outline: none;
-      border: 1px solid $main-blue;
-      margin-right: 4px;
+      outline: 1px solid $main-blue;
     }
     &:before {
       display: none;
@@ -126,16 +152,40 @@ export default {
   }
 
   &__count {
-    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
     flex-shrink: 0;
     width: 40px;
     font-size: 10px;
     color: $dark-text;
     font-weight: 400;
+    transition: $transition-duration * 2;
   }
 
   &__field:focus ~ &__count {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &--has-error &__field {
+    outline: 1px solid $danger-color;
+    &:hover {
+      outline: 1px solid $danger-color;
+    }
+  }
+
+  &__error {
+    position: absolute;
+    padding: 4px 16px;
+    border-radius: 4px;
+    background-color: $danger-color;
+    font-weight: 400;
+    font-size: 12px;
+    top: calc(100% + 2px);
+    z-index: 1;
   }
 }
 </style>

@@ -1,10 +1,12 @@
 <template>
-  <div class="form">
+  <form class="form">
     <div class="form__title">
       <text-area
         v-model="note.title"
         :max-length="MAX_NOTE_TITLE_LENGTH"
         autofocus
+        required
+        ref="title"
         placeholder="Type note title here..."
       />
     </div>
@@ -20,7 +22,7 @@
         placeholder="Type todo text here..."
       />
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -44,7 +46,8 @@ export default {
   data() {
     return {
       MAX_NOTE_TITLE_LENGTH,
-      MAX_TODO_TEXT_LENGTH
+      MAX_TODO_TEXT_LENGTH,
+      rules: {}
     };
   },
   computed: {
@@ -56,6 +59,13 @@ export default {
         this.$emit("input", note);
       }
     }
+  },
+  methods: {
+    validate() {
+      return new Promise(resolve => {
+        resolve(this.$refs.title.validate());
+      });
+    }
   }
 };
 </script>
@@ -64,14 +74,19 @@ export default {
 @import "../../style/variables";
 
 .form {
-  margin-bottom: 32px;
+  background-color: $default-bg;
+  border: 1px solid $border-color;
+  padding: 32px 16px;
+  max-width: 500px;
+  margin: 0 auto;
   &__title {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     font-size: 18px;
     font-weight: bold;
   }
   &__todo {
     display: flex;
+    margin-bottom: 12px;
   }
   &__todo-checkbox {
     flex-shrink: 0;

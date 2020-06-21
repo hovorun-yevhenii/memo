@@ -1,7 +1,7 @@
 <template>
-  <div class="actions">
-    <div class="actions__wrapper">
-      <icon-button class="actions__more" icon="more_horiz" />
+  <button class="actions">
+    <span class="actions__wrapper">
+      <icon-button class="actions__more" icon="more_horiz" disabled />
       <icon-button
         class="actions__edit"
         icon="create"
@@ -16,8 +16,8 @@
         title="Remove"
         @click="handleRemove"
       />
-    </div>
-  </div>
+    </span>
+  </button>
 </template>
 
 <script>
@@ -45,10 +45,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../style/variables";
+@import "../../style/mixins";
 
 $padding: 18px;
 
 .actions {
+  @include empty-button;
   position: relative;
   width: 36px;
   height: 34px;
@@ -77,7 +79,9 @@ $padding: 18px;
     z-index: 1;
   }
 
-  &:hover & {
+  &:hover &,
+  &:focus &,
+  &:focus-within & {
     &__more:hover {
       background-color: transparent;
     }

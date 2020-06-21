@@ -1,6 +1,6 @@
 <template>
   <transition name="modal" appear>
-    <div class="modal" @click.self="handleClick">
+    <div class="modal" tabindex="-1" @click.self="handleClick">
       <transition name="dialog" appear>
         <div class="modal__body">
           <slot></slot>
@@ -20,7 +20,7 @@ export default {
       boundKeyHandler: this.handleKeyPress.bind(this)
     };
   },
-  created() {
+  mounted() {
     const { innerWidth } = window;
     const { body, documentElement: html } = document;
     const scrollbarWidth = innerWidth - html.clientWidth;
@@ -28,6 +28,8 @@ export default {
     body.style.overflow = "hidden";
     body.style.paddingRight = `${scrollbarWidth}px`;
 
+    console.log(this.$el)
+    this.$el.focus();
     document.addEventListener("keydown", this.boundKeyHandler);
   },
   destroyed() {
@@ -41,15 +43,8 @@ export default {
       this.$emit("cancel");
     },
     handleKeyPress({ keyCode }) {
-      switch (keyCode) {
-        case KEYBOARD_CODES.enter:
-          this.$emit("confirm");
-          break;
-        case KEYBOARD_CODES.escape:
-          this.$emit("cancel");
-          break;
-        default:
-          return;
+      if (keyCode === KEYBOARD_CODES.escape) {
+        this.$emit("cancel");
       }
     }
   }
@@ -69,6 +64,10 @@ export default {
   padding: 8px;
   background-color: rgba(black, 0.8);
   z-index: 9;
+
+  &:focus {
+    outline: none;
+  }
 
   &__body {
     padding: 16px 32px;
