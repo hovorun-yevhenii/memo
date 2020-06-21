@@ -133,7 +133,7 @@ export default {
       outline: 1px dashed $border-color;
     }
     &:focus {
-      outline: 1px solid $primary-color;
+      outline: 1px solid $outline-color;
     }
     &:before {
       display: none;

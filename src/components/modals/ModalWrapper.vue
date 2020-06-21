@@ -28,7 +28,6 @@ export default {
     body.style.overflow = "hidden";
     body.style.paddingRight = `${scrollbarWidth}px`;
 
-    console.log(this.$el)
     this.$el.focus();
     document.addEventListener("keydown", this.boundKeyHandler);
   },

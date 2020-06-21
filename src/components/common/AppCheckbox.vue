@@ -57,7 +57,7 @@ export default {
   }
 
   &:focus-within {
-    outline: 1px solid $primary-color;
+    outline: 1px solid $outline-color;
   }
 
   &__icon {

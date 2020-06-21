@@ -116,10 +116,9 @@ export default {
   &__add-todo {
     position: relative;
     left: -2px;
-    opacity: 0.5;
     transition: $transition-duration;
-    &:hover {
-      opacity: 1;
+    &::v-deep * {
+      opacity: 0.5;
     }
   }
 
