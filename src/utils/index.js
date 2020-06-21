@@ -1,4 +1,4 @@
-const createNote = () => ({
+const createMockNote = () => ({
   id: `${Date.now()}_${(Math.random() * 10e6).toFixed()}`,
   title: "This is title",
   items: [
@@ -24,17 +24,17 @@ const createNote = () => ({
 const createTestNotes = qty =>
   Array(qty)
     .fill("")
-    .map(createNote);
+    .map(createMockNote);
+
+const getTodoSchema = () => ({
+  text: "",
+  checked: false
+});
 
 const getNoteSchema = () => ({
   id: `${Date.now()}_${(Math.random() * 10e6).toFixed()}`,
   title: "",
-  items: [
-    {
-      text: "",
-      checked: false
-    }
-  ]
+  items: [getTodoSchema()]
 });
 
 const copyNote = note => {
@@ -48,4 +48,4 @@ const copyNote = note => {
   }
 };
 
-export { copyNote, createTestNotes, getNoteSchema };
+export { copyNote, createTestNotes, getNoteSchema, getTodoSchema };

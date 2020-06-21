@@ -42,10 +42,11 @@ export default {
 
 .checkbox {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   cursor: pointer;
   user-select: none;
+  outline-offset: -1px;
   & * {
     & {
       color: $primary-color;

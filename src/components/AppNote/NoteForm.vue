@@ -24,6 +24,7 @@
     </div>
 
     <icon-button
+      v-if="note.items.length < MAX_TODO_ITEMS_COUNT"
       class="form__add-todo"
       icon="add_circle_outline"
       color="accent"
@@ -37,8 +38,12 @@
 import AppCheckbox from "../common/AppCheckbox";
 import TextArea from "../common/TextArea";
 import IconButton from "../common/IconButton";
-import { MAX_NOTE_TITLE_LENGTH, MAX_TODO_TEXT_LENGTH } from "../../constants";
-import { getNoteSchema } from "../../utils";
+import { getNoteSchema, getTodoSchema } from "../../utils";
+import {
+  MAX_NOTE_TITLE_LENGTH,
+  MAX_TODO_TEXT_LENGTH,
+  MAX_TODO_ITEMS_COUNT
+} from "../../constants";
 
 export default {
   name: "NoteForm",
@@ -57,7 +62,7 @@ export default {
     return {
       MAX_NOTE_TITLE_LENGTH,
       MAX_TODO_TEXT_LENGTH,
-      rules: {}
+      MAX_TODO_ITEMS_COUNT
     };
   },
   computed: {
@@ -72,9 +77,7 @@ export default {
   },
   methods: {
     addTodoItem() {
-      this.note.items.push({
-        checked: true
-      })
+      this.note.items.push(getTodoSchema());
     },
     validate() {
       return new Promise(resolve => {
@@ -93,7 +96,7 @@ export default {
   border: 1px solid $border-color;
   max-width: $breakpoint-phone;
   margin: 48px auto 0;
-  padding: 32px 16px;
+  padding: 32px 16px 16px;
   box-sizing: border-box;
   &__title {
     margin-bottom: 24px;
@@ -109,6 +112,15 @@ export default {
   }
   &__todo-text {
     flex-grow: 1;
+  }
+  &__add-todo {
+    position: relative;
+    left: -2px;
+    opacity: 0.5;
+    transition: $transition-duration;
+    &:hover {
+      opacity: 1;
+    }
   }
 
   @media (max-width: $breakpoint-phone) {

@@ -127,6 +127,8 @@ export default {
     line-height: 1.3;
     word-break: break-word;
     transition: border $transition-duration / 2;
+    cursor: text;
+    outline-offset: -1px;
     &:hover {
       outline: 1px dashed $border-color;
     }
@@ -151,7 +153,7 @@ export default {
 
   &__count {
     position: absolute;
-    top: calc(100% + 2px);
+    top: calc(100% + 1px);
     right: 0;
     visibility: hidden;
     opacity: 0;
@@ -176,9 +178,8 @@ export default {
 
   &__error {
     position: absolute;
-    top: calc(100% + 2px);
+    top: 100%;
     padding: 4px 16px;
-    border-radius: 4px;
     background-color: $danger-color;
     font-weight: 400;
     font-size: 12px;
