@@ -25,7 +25,8 @@
 import NoteCard from "../components/AppNote/NoteCard.vue";
 import NewNoteButton from "../components/AppNote/NewNoteButton.vue";
 import ConfirmModal from "../components/modals/ConfirmModal.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import { REMOVE_NOTE } from "../store/mutation-types";
 
 export default {
   name: "NoteList",
@@ -44,7 +45,9 @@ export default {
     ...mapGetters(["notes"])
   },
   methods: {
-    ...mapActions(["removeNote"]),
+    ...mapMutations({
+      removeNote: REMOVE_NOTE
+    }),
     handleEdit({ id }) {
       this.$router.push({
         name: "note",

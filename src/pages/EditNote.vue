@@ -4,17 +4,9 @@
 
     <div class="edit-note__actions">
       <div>
-        <text-button
-          text="undo"
-          :disabled="!canUndo"
-          @click="handleUndo"
-        />
+        <text-button text="undo" :disabled="!canUndo" @click="handleUndo" />
 
-        <text-button
-          text="redo"
-          :disabled="!canRedo"
-          @click="handleRedo"
-        />
+        <text-button text="redo" :disabled="!canRedo" @click="handleRedo" />
 
         <text-button color="primary" text="revert" @click="handleRevert" />
       </div>
@@ -31,7 +23,8 @@
 import NoteForm from "../components/AppNote/NoteForm.vue";
 import TextButton from "../components/common/TextButton.vue";
 import undoRedo from "../mixins/undoRedo";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import { UPDATE_NOTE, SET_EDITING_NOTE } from "../store/mutation-types";
 import { NEW_NOTE_KEY } from "../constants";
 import { getNoteSchema } from "../utils";
 
@@ -46,13 +39,16 @@ export default {
     ...mapGetters({
       getNoteById: "getNoteById",
       note: "editingNote"
-    })
+    }),
+    createMode() {
+      return this.$route.params.id === NEW_NOTE_KEY;
+    }
   },
   watch: {
     note: {
       handler(note, oldValue) {
         if (oldValue) {
-          this.$store.commit("EDIT_NOTE", note);
+          this.updateNote(note);
         }
       },
       deep: true
@@ -62,22 +58,29 @@ export default {
     this.setNote();
   },
   beforeDestroy() {
-    this.$store.commit("SET_EDITING_NOTE", null);
+    this.setEditingNote(null);
   },
   methods: {
+    ...mapMutations({
+      setEditingNote: SET_EDITING_NOTE,
+      updateNote: UPDATE_NOTE
+    }),
     handleSave() {
       this.$refs.form.validate().then(isValid => {
-        console.log(isValid);
+        if (isValid) {
+          console.log(isValid)
+        }
       });
     },
     handleRevert() {},
     handleRemove() {},
     setNote() {
-      const id = this.$route.params.id;
-      const note = id === NEW_NOTE_KEY ? getNoteSchema() : this.getNoteById(id);
+      const note = this.createMode
+        ? getNoteSchema()
+        : this.getNoteById(this.$route.params.id);
 
       if (note) {
-        this.$store.commit("SET_EDITING_NOTE", note);
+        this.setEditingNote(note);
       } else {
         this.$router.push("/");
       }
@@ -113,7 +116,6 @@ export default {
   }
 
   @media (max-width: $breakpoint-phone) {
-
   }
 }
 </style>

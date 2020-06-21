@@ -1,4 +1,5 @@
-import { MAX_MUTATION_STACK_SIZE, EDIT_NOTE_MUTATION } from "../constants";
+import { MAX_MUTATION_STACK_SIZE } from "../constants";
+import { UPDATE_NOTE } from "../store/mutation-types";
 import { copyNote } from "../utils";
 
 export default {
@@ -21,7 +22,7 @@ export default {
   },
   created() {
     this.unsubscribe = this.$store.subscribe(mutation => {
-      if (mutation.type === EDIT_NOTE_MUTATION) {
+      if (mutation.type === UPDATE_NOTE) {
         const { type, payload } = mutation;
 
         this.done.push({ type, payload: copyNote(payload) });

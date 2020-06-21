@@ -3,6 +3,12 @@ import Vuex from "vuex";
 import VuexPersistence from "vuex-persist";
 import { copyNote } from "../utils";
 import { VUEX_PERSIST_KEY } from "../constants";
+import {
+  SET_NOTES,
+  REMOVE_NOTE,
+  SET_EDITING_NOTE,
+  UPDATE_NOTE
+} from "./mutation-types";
 
 const vuexLocal = new VuexPersistence({
   key: VUEX_PERSIST_KEY,
@@ -23,18 +29,18 @@ export default new Vuex.Store({
     getNoteById: state => id => state.notes.find(note => note.id === id)
   },
   mutations: {
-    SET_NOTES(state, notes) {
+    [SET_NOTES](state, notes) {
       state.notes = notes;
     },
-    REMOVE_NOTE(state, id) {
+    [REMOVE_NOTE](state, id) {
       const index = state.notes.findIndex(note => note.id === id);
 
       state.notes.splice(index, 1);
     },
-    SET_EDITING_NOTE(state, note) {
+    [SET_EDITING_NOTE](state, note) {
       state.editingNote = copyNote(note);
     },
-    EDIT_NOTE(state, note) {
+    [UPDATE_NOTE](state, note) {
       state.editingNote = note;
     }
   },
@@ -47,11 +53,8 @@ export default new Vuex.Store({
       } catch (_) {
         notes = [];
       } finally {
-        commit("SET_NOTES", notes);
+        commit(SET_NOTES, notes);
       }
-    },
-    removeNote({ commit }, { id }) {
-      commit("REMOVE_NOTE", id);
     }
   }
 });
