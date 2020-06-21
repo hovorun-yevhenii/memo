@@ -87,13 +87,7 @@ export default {
       this.note.items.splice(index, 1);
     },
     validate() {
-      return new Promise(resolve => {
-        const isValid = this.$refs.title.validate();
-
-        this.note.items = this.note.items.filter(item => item.text.length);
-
-        resolve(isValid);
-      });
+      return new Promise(resolve => resolve(this.$refs.title.validate()));
     }
   }
 };

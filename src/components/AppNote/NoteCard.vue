@@ -62,6 +62,7 @@ export default {
 .note {
   display: flex;
   flex-direction: column;
+  min-height: 110px;
   width: 280px;
   margin: 16px;
   padding: 8px;

@@ -8,8 +8,7 @@ import {
   REMOVE_NOTE,
   SET_EDITING_NOTE,
   UPDATE_NOTE,
-  ADD_NOTE,
-  PUT_NOTE
+  SAVE_NOTE
 } from "./mutation-types";
 
 const vuexLocal = new VuexPersistence({
@@ -45,14 +44,15 @@ export default new Vuex.Store({
     [UPDATE_NOTE](state, note) {
       state.editingNote = note;
     },
-    [ADD_NOTE](state) {
-      state.notes.push(state.editingNote);
-    },
-    [PUT_NOTE](state) {
+    [SAVE_NOTE](state) {
       const note = state.editingNote;
       const index = state.notes.findIndex(item => item.id === note.id);
+      const order = index > -1 ? index : state.notes.length;
 
-      state.notes.splice(index, 1, note);
+      state.notes.splice(order, 1, {
+        ...note,
+        items: note.items.filter(item => item.text.length)
+      });
     }
   },
   actions: {

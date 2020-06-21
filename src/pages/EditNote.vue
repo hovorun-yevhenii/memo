@@ -27,8 +27,7 @@ import { getNoteSchema } from "../utils";
 import {
   UPDATE_NOTE,
   SET_EDITING_NOTE,
-  ADD_NOTE,
-  PUT_NOTE
+  SAVE_NOTE
 } from "../store/mutation-types";
 
 export default {
@@ -43,7 +42,7 @@ export default {
       getNoteById: "getNoteById",
       note: "editingNote"
     }),
-    createMode() {
+    isNewNote() {
       return this.$route.params.id === NEW_NOTE_KEY;
     }
   },
@@ -67,26 +66,21 @@ export default {
     ...mapMutations({
       setEditingNote: SET_EDITING_NOTE,
       updateNote: UPDATE_NOTE,
-      addNote: ADD_NOTE,
-      putNote: PUT_NOTE
+      saveNote: SAVE_NOTE
     }),
-    async handleSave() {
-      const isValid = await this.$refs.form.validate();
+    handleSave() {
+      this.$refs.form.validate().then(isValid => {
+        if (isValid) {
+          this.saveNote();
 
-      if (isValid) {
-        if (this.createMode) {
-          this.addNote();
-        } else {
-          this.putNote();
+          this.$router.push("/");
         }
-
-        this.$router.push("/");
-      }
+      });
     },
     handleRevert() {},
     handleRemove() {},
     setNote() {
-      const note = this.createMode
+      const note = this.isNewNote
         ? getNoteSchema()
         : this.getNoteById(this.$route.params.id);
 
