@@ -4,7 +4,7 @@ const NEW_NOTE_KEY = "new";
 const EDIT_NOTE_MUTATION = "EDIT_NOTE";
 const MAX_MUTATION_STACK_SIZE = 512;
 const MAX_NOTE_TITLE_LENGTH = 256;
-const MAX_TODO_TEXT_LENGTH = 64;
+const MAX_TODO_TEXT_LENGTH = 128;
 const KEYBOARD_CODES = {
   enter: 13,
   escape: 27

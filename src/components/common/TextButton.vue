@@ -1,5 +1,5 @@
 <template>
-  <button class="button" :class="type" @click="handleClick">
+  <button class="button" :class="type" v-text="text" @click="handleClick">
     <slot></slot>
   </button>
 </template>
@@ -8,7 +8,14 @@
 export default {
   name: "TextButton",
   props: {
-    type: String
+    type: {
+      type: String,
+      default: ""
+    },
+    text: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     handleClick(event) {
@@ -24,7 +31,7 @@ export default {
 
 .button {
   @include empty-button;
-  min-width: 90px;
+  min-width: 60px;
   padding: 8px 16px;
   border: 2px solid $border-color;
   border-radius: 4px;

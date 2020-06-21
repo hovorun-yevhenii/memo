@@ -4,6 +4,7 @@
       <text-area
         v-model="note.title"
         :max-length="MAX_NOTE_TITLE_LENGTH"
+        autofocus
         placeholder="Type note title here..."
       />
     </div>
@@ -16,8 +17,7 @@
       <text-area
         class="form__todo-text"
         v-model="note.items[index].text"
-        :max-length="MAX_TODO_TEXT_LENGTH"
-        placeholder="Type todo here..."
+        placeholder="Type todo text here..."
       />
     </div>
   </div>
@@ -75,10 +75,9 @@ export default {
   }
   &__todo-checkbox {
     flex-shrink: 0;
-    margin-right: 8px;
   }
   &__todo-text {
-    padding-top: 11px;
+    flex-grow: 1;
   }
 }
 </style>

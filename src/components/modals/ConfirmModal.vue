@@ -10,8 +10,8 @@
       ?
     </div>
     <div class="confirm__actions">
-      <text-button type="default" @click="handleCancel">Cancel</text-button>
-      <text-button type="danger" @click="handleConfirm">Confirm</text-button>
+      <text-button @click="handleCancel" text="cancel" />
+      <text-button type="danger" @click="handleConfirm" text="confirm" />
     </div>
   </modal-wrapper>
 </template>

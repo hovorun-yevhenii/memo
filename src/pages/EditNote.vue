@@ -1,17 +1,44 @@
 <template>
-  <div class="edit-note" v-if="editingNote">
-    <note-form v-model="editingNote" />
+  <div class="edit-note" v-if="note">
+    <note-form class="edit-note__form" v-model="note" />
 
-    <button @click="handleUndo" :disabled="!canUndo">undo</button>
-    <button @click="handleRedo" :disabled="!canRedo">redo</button>
-    <button @click="handleSave" :disabled="true">save</button>
-    <button @click="handleRevert" :disabled="true">revert</button>
-    <button @click="handleRemove">remove</button>
+    <div class="edit-note__actions">
+      <text-button
+        type="default"
+        text="undo"
+        :disabled="!canUndo"
+        @click="handleUndo"
+      />
+
+      <text-button
+        type="default"
+        text="redo"
+        :disabled="!canRedo"
+        @click="handleRedo"
+      />
+
+      <text-button
+        type="default"
+        text="save"
+        :disabled="true"
+        @click="handleSave"
+      />
+
+      <text-button
+        type="default"
+        text="revert"
+        :disabled="true"
+        @click="handleRevert"
+      />
+
+      <text-button type="danger" text="remove" @click="handleRemove" />
+    </div>
   </div>
 </template>
 
 <script>
 import NoteForm from "../components/AppNote/NoteForm.vue";
+import TextButton from "../components/common/TextButton.vue";
 import undoRedo from "../mixins/undoRedo";
 import { mapGetters } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
@@ -21,13 +48,17 @@ export default {
   name: "EditNote",
   mixins: [undoRedo],
   components: {
-    NoteForm
+    NoteForm,
+    TextButton
   },
   computed: {
-    ...mapGetters(["getNoteById", "editingNote"])
+    ...mapGetters({
+      getNoteById: "getNoteById",
+      note: "editingNote"
+    })
   },
   watch: {
-    editingNote: {
+    note: {
       handler(note, oldValue) {
         if (oldValue) {
           this.$store.commit("EDIT_NOTE", note);

@@ -1,15 +1,22 @@
 <template>
-  <div
-    contenteditable="true"
-    spellcheck="false"
-    v-once
-    v-text="value"
-    :data-placeholder="placeholder"
-    @input="handleInput"
-  ></div>
+  <div class="text-area" :class="{ 'text-area--empty': value.length === 0 }">
+    <div
+      contenteditable="true"
+      spellcheck="false"
+      class="text-area__field"
+      ref="input"
+      v-once
+      v-text="value"
+      :data-placeholder="placeholder"
+      @input="handleInput"
+    ></div>
+    <div class="text-area__count">{{ value.length }}/{{ maxLength }}</div>
+  </div>
 </template>
 
 <script>
+import { MAX_TODO_TEXT_LENGTH } from "../../constants";
+
 export default {
   name: "TextArea",
   props: {
@@ -19,18 +26,28 @@ export default {
     },
     maxLength: {
       type: Number,
-      default: 64
+      default: MAX_TODO_TEXT_LENGTH
     },
     placeholder: {
       type: String,
       default: ""
+    },
+    autofocus: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {
     value(newValue) {
-      if (document.activeElement !== this.$el) {
-        this.$el.innerHTML = newValue;
+      if (document.activeElement !== this.$refs.input) {
+        this.$refs.input.innerHTML = newValue;
       }
+    }
+  },
+  mounted() {
+    if (this.autofocus) {
+      this.$refs.input.focus();
+      this.setCaretPosition(this.value.length + 1);
     }
   },
   methods: {
@@ -57,12 +74,12 @@ export default {
       const selection = window.getSelection();
 
       try {
-        range.setStart(this.$el.childNodes[0], position - 1);
+        range.setStart(this.$refs.input.childNodes[0], position - 1);
         range.collapse(true);
         selection.removeAllRanges();
         selection.addRange(range);
       } catch (_) {
-        this.$el.blur();
+        this.setCaretPosition(this.value.length + 1);
       }
     }
   }
@@ -72,16 +89,53 @@ export default {
 <style lang="scss" scoped>
 @import "../../style/variables";
 
-div {
-  &.empty {
-    background-color: #fa0;
+.text-area {
+  display: flex;
+  align-items: flex-end;
+
+  &__field {
+    flex-grow: 1;
+    padding: 7px 9px;
+    margin-right: 44px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    line-height: 1.3;
+    transition: border $transition-duration / 2;
+    &:hover {
+      border: 1px dashed $border-color;
+    }
+    &:focus {
+      outline: none;
+      border: 1px solid $main-blue;
+      margin-right: 4px;
+    }
+    &:before {
+      display: none;
+      content: attr(data-placeholder);
+      font-weight: lighter;
+      color: $dark-text;
+    }
   }
-  background-color: plum;
-  &:hover {
-    outline: 1px dashed;
+
+  &--empty & {
+    &__field {
+      &:before {
+        display: block;
+      }
+    }
   }
-  &:focus {
-    outline: 1px solid;
+
+  &__count {
+    display: none;
+    flex-shrink: 0;
+    width: 40px;
+    font-size: 10px;
+    color: $dark-text;
+    font-weight: 400;
+  }
+
+  &__field:focus ~ &__count {
+    display: block;
   }
 }
 </style>
