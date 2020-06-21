@@ -51,15 +51,21 @@ export default {
   transition: background-color $transition-duration;
 
   & * {
+    color: $border-color;
+  }
+
+  &.primary * {
     color: $primary-color;
+  }
+
+  &.accent * {
+    color: $accent-color;
   }
 
   &.danger * {
     color: $danger-color;
   }
-  &.accent * {
-    color: $accent-color;
-  }
+
   &:hover {
     background-color: rgba(black, 0.7);
   }

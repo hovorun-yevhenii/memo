@@ -69,6 +69,7 @@ export default {
   }
 
   &__body {
+    min-width: 224px;
     padding: 16px 32px;
     border-radius: 4px;
     border: 1px solid $border-color;

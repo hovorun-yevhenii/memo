@@ -7,7 +7,9 @@ import {
   SET_NOTES,
   REMOVE_NOTE,
   SET_EDITING_NOTE,
-  UPDATE_NOTE
+  UPDATE_NOTE,
+  ADD_NOTE,
+  PUT_NOTE
 } from "./mutation-types";
 
 const vuexLocal = new VuexPersistence({
@@ -33,7 +35,7 @@ export default new Vuex.Store({
       state.notes = notes;
     },
     [REMOVE_NOTE](state, id) {
-      const index = state.notes.findIndex(note => note.id === id);
+      const index = state.notes.findIndex(item => item.id === id);
 
       state.notes.splice(index, 1);
     },
@@ -42,6 +44,15 @@ export default new Vuex.Store({
     },
     [UPDATE_NOTE](state, note) {
       state.editingNote = note;
+    },
+    [ADD_NOTE](state) {
+      state.notes.push(state.editingNote);
+    },
+    [PUT_NOTE](state) {
+      const note = state.editingNote;
+      const index = state.notes.findIndex(item => item.id === note.id);
+
+      state.notes.splice(index, 1, note);
     }
   },
   actions: {

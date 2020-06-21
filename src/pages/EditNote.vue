@@ -5,9 +5,7 @@
     <div class="edit-note__actions">
       <div>
         <text-button text="undo" :disabled="!canUndo" @click="handleUndo" />
-
         <text-button text="redo" :disabled="!canRedo" @click="handleRedo" />
-
         <text-button color="primary" text="revert" @click="handleRevert" />
       </div>
 
@@ -24,9 +22,14 @@ import NoteForm from "../components/AppNote/NoteForm.vue";
 import TextButton from "../components/common/TextButton.vue";
 import undoRedo from "../mixins/undoRedo";
 import { mapGetters, mapMutations } from "vuex";
-import { UPDATE_NOTE, SET_EDITING_NOTE } from "../store/mutation-types";
 import { NEW_NOTE_KEY } from "../constants";
 import { getNoteSchema } from "../utils";
+import {
+  UPDATE_NOTE,
+  SET_EDITING_NOTE,
+  ADD_NOTE,
+  PUT_NOTE
+} from "../store/mutation-types";
 
 export default {
   name: "EditNote",
@@ -63,14 +66,22 @@ export default {
   methods: {
     ...mapMutations({
       setEditingNote: SET_EDITING_NOTE,
-      updateNote: UPDATE_NOTE
+      updateNote: UPDATE_NOTE,
+      addNote: ADD_NOTE,
+      putNote: PUT_NOTE
     }),
-    handleSave() {
-      this.$refs.form.validate().then(isValid => {
-        if (isValid) {
-          console.log(isValid)
+    async handleSave() {
+      const isValid = await this.$refs.form.validate();
+
+      if (isValid) {
+        if (this.createMode) {
+          this.addNote();
+        } else {
+          this.putNote();
         }
-      });
+
+        this.$router.push("/");
+      }
     },
     handleRevert() {},
     handleRemove() {},

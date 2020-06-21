@@ -45,10 +45,6 @@ export default {
   font-weight: bold;
   transition: $transition-duration;
 
-  &.danger {
-    background-color: rgba($danger-color, 0.7);
-    border-color: darken($danger-color, 20%);
-  }
   &.primary {
     background-color: rgba($primary-color, 0.7);
     border-color: darken($primary-color, 20%);
@@ -56,6 +52,10 @@ export default {
   &.accent {
     background-color: rgba($accent-color, 0.7);
     border-color: darken($accent-color, 20%);
+  }
+  &.danger {
+    background-color: rgba($danger-color, 0.7);
+    border-color: darken($danger-color, 20%);
   }
   &:hover {
     filter: brightness(1.25);

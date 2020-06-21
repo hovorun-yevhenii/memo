@@ -1,7 +1,12 @@
 <template>
   <button class="actions">
     <span class="actions__wrapper">
-      <icon-button class="actions__more" icon="more_horiz" disabled />
+      <icon-button
+        class="actions__more"
+        icon="more_horiz"
+        color="primary"
+        disabled
+      />
       <icon-button
         class="actions__edit"
         icon="create"

@@ -21,13 +21,17 @@
         v-model="note.items[index].text"
         placeholder="Type todo text here..."
       />
+      <icon-button
+        icon="close"
+        title="Remove item"
+        @click="removeTodoItem(index)"
+      />
     </div>
 
     <icon-button
       v-if="note.items.length < MAX_TODO_ITEMS_COUNT"
       class="form__add-todo"
       icon="add_circle_outline"
-      color="accent"
       title="Add todo item"
       @click="addTodoItem"
     />
@@ -79,9 +83,16 @@ export default {
     addTodoItem() {
       this.note.items.push(getTodoSchema());
     },
+    removeTodoItem(index) {
+      this.note.items.splice(index, 1);
+    },
     validate() {
       return new Promise(resolve => {
-        resolve(this.$refs.title.validate());
+        const isValid = this.$refs.title.validate();
+
+        this.note.items = this.note.items.filter(item => item.text.length);
+
+        resolve(isValid);
       });
     }
   }
@@ -114,12 +125,7 @@ export default {
     flex-grow: 1;
   }
   &__add-todo {
-    position: relative;
-    left: -2px;
-    transition: $transition-duration;
-    &::v-deep * {
-      opacity: 0.5;
-    }
+    width: 34px;
   }
 
   @media (max-width: $breakpoint-phone) {
