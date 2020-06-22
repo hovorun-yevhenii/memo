@@ -1,7 +1,7 @@
 <template>
   <div class="note">
     <div class="note__header">
-      <div class="note__title">{{ note.title }}</div>
+      <div class="note__title ellipsis-overflow">{{ note.title }}</div>
 
       <note-card-actions
         :note="note"
@@ -12,7 +12,7 @@
 
     <div v-for="(item, index) in itemsToDisplay" :key="index" class="todo">
       <app-checkbox class="todo__checkbox" v-model="item.checked" />
-      <div class="todo__text">{{ item.text }}</div>
+      <div class="todo__text ellipsis-overflow">{{ item.text }}</div>
     </div>
     <div v-if="restItemsCount" class="todo__rest">
       and {{ restItemsCount }} more
@@ -62,7 +62,7 @@ export default {
 .note {
   display: flex;
   flex-direction: column;
-  min-height: 110px;
+  min-height: 124px;
   width: 280px;
   margin: 16px;
   padding: 8px;
@@ -70,6 +70,7 @@ export default {
   border: 1px solid $border-color;
   border-radius: 4px;
   pointer-events: none;
+  box-sizing: border-box;
 
   @media (max-width: $breakpoint-phone) {
     margin: 8px;
@@ -82,11 +83,11 @@ export default {
   }
 
   &__title {
+    width: calc(100% - 32px);
     padding: 8px;
     font-size: 18px;
     font-family: $montserrat;
     font-weight: bold;
-    word-break: break-word;
   }
 
   &__actions {
@@ -97,10 +98,10 @@ export default {
 .todo {
   display: flex;
   &__text {
+    width: calc(100% - 64px);
     padding-top: 11px;
     font-size: 14px;
     color: $dark-text;
-    word-break: break-word;
   }
   &__checkbox {
     flex-shrink: 0;
@@ -112,5 +113,11 @@ export default {
     color: $dark-text;
     opacity: 0.7;
   }
+}
+
+.ellipsis-overflow {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 </style>

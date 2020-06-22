@@ -40,7 +40,6 @@ export default {
   font-family: $montserrat;
   opacity: 0.5;
   transition: $transition-duration ease;
-
   cursor: pointer;
 
   @media (max-width: $breakpoint-phone) {

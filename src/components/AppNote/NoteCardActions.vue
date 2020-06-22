@@ -57,6 +57,7 @@ $padding: 18px;
 .actions {
   @include empty-button;
   position: relative;
+  top: 3px;
   width: 36px;
   height: 34px;
   pointer-events: auto;
