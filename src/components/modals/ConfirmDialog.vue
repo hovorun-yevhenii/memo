@@ -6,7 +6,7 @@
   >
     <div class="confirm__title">
       Remove note
-      <span class="confirm__note-name">{{ note.title }}</span>
+      <span class="confirm__note-name">{{ title }}</span>
       ?
     </div>
     <div class="confirm__actions">
@@ -19,9 +19,11 @@
 <script>
 import ModalWrapper from "./ModalWrapper.vue";
 import TextButton from "../common/TextButton.vue";
+import { SHORT_TITLE_LENGTH } from "../../constants";
+import { truncate } from "../../utils";
 
 export default {
-  name: "ConfirmModal",
+  name: "ConfirmDialog",
   components: {
     ModalWrapper,
     TextButton
@@ -29,6 +31,11 @@ export default {
   props: {
     note: {
       type: Object
+    }
+  },
+  computed: {
+    title() {
+      return truncate(this.note.title, SHORT_TITLE_LENGTH);
     }
   },
   methods: {
@@ -53,6 +60,7 @@ export default {
 
   &__note-name {
     color: $primary-color;
+    word-break: break-word;
   }
 
   &__actions {

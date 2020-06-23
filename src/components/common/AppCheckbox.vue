@@ -1,5 +1,9 @@
 <template>
-  <label class="checkbox" @keypress.enter="checked = !checked">
+  <label
+    class="checkbox"
+    :class="{ disabled }"
+    @keypress.enter="checked = !checked"
+  >
     <transition name="checkbox" mode="out-in">
       <span class="checkbox__icon" :key="checked">
         <i v-if="checked" class="material-icons checked">
@@ -11,7 +15,12 @@
       </span>
     </transition>
 
-    <input class="checkbox__input" type="checkbox" v-model="checked" />
+    <input
+      class="checkbox__input"
+      type="checkbox"
+      v-model="checked"
+      :disabled="disabled"
+    />
   </label>
 </template>
 
@@ -20,6 +29,10 @@ export default {
   name: "AppCheckbox",
   props: {
     value: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     }
@@ -47,6 +60,9 @@ export default {
   cursor: pointer;
   user-select: none;
   outline-offset: -1px;
+  &.disabled {
+    pointer-events: none;
+  }
   & * {
     & {
       color: $primary-color;

@@ -12,10 +12,10 @@
       />
     </transition-group>
 
-    <confirm-modal
-      v-if="showConfirmModal"
+    <confirm-dialog
+      v-if="showConfirmDialog"
       :note="noteToRemove"
-      @cancel="closeConfirmModal"
+      @cancel="closeConfirmDialog"
       @confirm="confirmRemove"
     />
   </div>
@@ -24,7 +24,7 @@
 <script>
 import NoteCard from "../components/AppNote/NoteCard.vue";
 import NewNoteButton from "../components/AppNote/NewNoteButton.vue";
-import ConfirmModal from "../components/modals/ConfirmModal.vue";
+import ConfirmDialog from "../components/modals/ConfirmDialog.vue";
 import { mapGetters, mapMutations } from "vuex";
 import { REMOVE_NOTE } from "../store/mutation-types";
 
@@ -33,11 +33,11 @@ export default {
   components: {
     NoteCard,
     NewNoteButton,
-    ConfirmModal
+    ConfirmDialog
   },
   data() {
     return {
-      showConfirmModal: false,
+      showConfirmDialog: false,
       noteToRemove: null
     };
   },
@@ -56,14 +56,14 @@ export default {
     },
     handleRemove(note) {
       this.noteToRemove = note;
-      this.showConfirmModal = true;
+      this.showConfirmDialog = true;
     },
     confirmRemove() {
       this.removeNote(this.noteToRemove);
-      this.closeConfirmModal();
+      this.closeConfirmDialog();
     },
-    closeConfirmModal() {
-      this.showConfirmModal = false;
+    closeConfirmDialog() {
+      this.showConfirmDialog = false;
       this.noteToRemove = null;
     }
   }

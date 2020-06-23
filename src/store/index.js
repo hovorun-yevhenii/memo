@@ -51,7 +51,7 @@ export default new Vuex.Store({
 
       state.notes.splice(order, 1, {
         ...note,
-        items: note.items.filter(item => item.text.length)
+        items: note.items.filter(item => item.text.trim().length)
       });
     }
   },

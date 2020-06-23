@@ -20,8 +20,8 @@
       </div>
     </div>
 
-    <confirm-modal
-      v-if="showConfirmModal"
+    <confirm-dialog
+      v-if="showConfirmDialog"
       :note="note"
       @cancel="closeConfirmDialog"
       @confirm="handleRemove"
@@ -32,7 +32,7 @@
 <script>
 import NoteForm from "../components/AppNote/NoteForm.vue";
 import TextButton from "../components/common/TextButton.vue";
-import ConfirmModal from "../components/modals/ConfirmModal.vue";
+import ConfirmDialog from "../components/modals/ConfirmDialog.vue";
 import undoRedo from "../mixins/undoRedo";
 import { mapGetters, mapMutations } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
@@ -50,11 +50,11 @@ export default {
   components: {
     NoteForm,
     TextButton,
-    ConfirmModal
+    ConfirmDialog
   },
   data() {
     return {
-      showConfirmModal: false
+      showConfirmDialog: false
     };
   },
   computed: {
@@ -107,10 +107,10 @@ export default {
       this.navigateToList();
     },
     openConfirmDialog() {
-      this.showConfirmModal = true;
+      this.showConfirmDialog = true;
     },
     closeConfirmDialog() {
-      this.showConfirmModal = false;
+      this.showConfirmDialog = false;
     },
     setNote() {
       const note = this.isNewNote
@@ -145,18 +145,6 @@ export default {
     * {
       margin: 8px 8px 0 8px;
     }
-    button {
-      @include empty-button;
-      padding: 8px;
-      border-radius: 4px;
-      border: 1px solid $border-color;
-      &:disabled {
-        opacity: 0.3;
-      }
-    }
-  }
-
-  @media (max-width: $breakpoint-phone) {
   }
 }
 </style>

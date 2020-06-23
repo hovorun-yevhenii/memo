@@ -1,7 +1,7 @@
 <template>
   <div class="note">
     <div class="note__header">
-      <div class="note__title ellipsis-overflow">{{ note.title }}</div>
+      <div class="note__title">{{ title }}</div>
 
       <note-card-actions
         :note="note"
@@ -11,8 +11,8 @@
     </div>
 
     <div v-for="(item, index) in itemsToDisplay" :key="index" class="todo">
-      <app-checkbox class="todo__checkbox" v-model="item.checked" />
-      <div class="todo__text ellipsis-overflow">{{ item.text }}</div>
+      <app-checkbox class="todo__checkbox" :value="item.checked" disabled />
+      <div class="todo__text">{{ item.text }}</div>
     </div>
     <div v-if="restItemsCount" class="todo__rest">
       and {{ restItemsCount }} more
@@ -23,7 +23,12 @@
 <script>
 import AppCheckbox from "../common/AppCheckbox.vue";
 import NoteCardActions from "./NoteCardActions.vue";
-import { LIST_VIEW_ITEMS_COUNT } from "../../constants";
+import { truncate } from "../../utils";
+import {
+  LIST_VIEW_ITEMS_COUNT,
+  SHORT_TITLE_LENGTH,
+  SHORT_TEXT_LENGTH,
+} from "../../constants";
 
 export default {
   name: "NoteCard",
@@ -39,7 +44,13 @@ export default {
   },
   computed: {
     itemsToDisplay() {
-      return this.note.items.slice(0, LIST_VIEW_ITEMS_COUNT);
+      return this.note.items.slice(0, LIST_VIEW_ITEMS_COUNT).map(item => ({
+        ...item,
+        text: truncate(item.text, SHORT_TEXT_LENGTH)
+      }));
+    },
+    title() {
+      return truncate(this.note.title, SHORT_TITLE_LENGTH);
     },
     restItemsCount() {
       return this.note.items.length - this.itemsToDisplay.length;
@@ -69,7 +80,6 @@ export default {
   background: $default-bg;
   border: 1px solid $border-color;
   border-radius: 4px;
-  pointer-events: none;
   box-sizing: border-box;
 
   @media (max-width: $breakpoint-phone) {
@@ -88,6 +98,7 @@ export default {
     font-size: 18px;
     font-family: $montserrat;
     font-weight: bold;
+    word-break: break-word;
   }
 
   &__actions {
@@ -99,9 +110,10 @@ export default {
   display: flex;
   &__text {
     width: calc(100% - 64px);
-    padding-top: 11px;
+    padding-top: 9px;
     font-size: 14px;
     color: $dark-text;
+    word-break: break-word;
   }
   &__checkbox {
     flex-shrink: 0;
@@ -113,11 +125,5 @@ export default {
     color: $dark-text;
     opacity: 0.7;
   }
-}
-
-.ellipsis-overflow {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
 }
 </style>
