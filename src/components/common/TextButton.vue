@@ -57,8 +57,13 @@ export default {
     background-color: rgba($danger-color, 0.7);
     border-color: darken($danger-color, 20%);
   }
-  &:hover {
+  &:active:hover:not([disabled]) {
     filter: brightness(1.25);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 </style>

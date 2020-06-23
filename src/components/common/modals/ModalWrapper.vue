@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { KEYBOARD_CODES } from "../../constants";
+import { KEYBOARD_CODES } from "../../../constants";
 
 export default {
   name: "ModalWrapper",
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../style/variables";
+@import "../../../style/variables";
 
 .modal {
   position: fixed;

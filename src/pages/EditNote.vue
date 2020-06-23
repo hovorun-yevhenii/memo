@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import NoteForm from "../components/AppNote/NoteForm.vue";
+import NoteForm from "../components/note/NoteForm.vue";
 import TextButton from "../components/common/TextButton.vue";
-import ConfirmDialog from "../components/modals/ConfirmDialog.vue";
+import ConfirmDialog from "../components/common/modals/ConfirmDialog.vue";
 import undoRedo from "../mixins/undoRedo";
 import { mapGetters, mapMutations } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";

@@ -18,9 +18,9 @@
 
 <script>
 import ModalWrapper from "./ModalWrapper.vue";
-import TextButton from "../common/TextButton.vue";
-import { SHORT_TITLE_LENGTH } from "../../constants";
-import { truncate } from "../../utils";
+import TextButton from "../TextButton.vue";
+import { SHORT_TITLE_LENGTH } from "../../../constants";
+import { truncate } from "../../../utils";
 
 export default {
   name: "ConfirmDialog",
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../style/variables";
+@import "../../../style/variables";
 
 .confirm {
   &__title {
