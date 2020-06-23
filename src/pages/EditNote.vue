@@ -58,22 +58,17 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      getNoteById: "getNoteById",
-      note: "editingNote"
-    }),
+    ...mapGetters(["getNoteById", "editingNote"]),
+    note: {
+      get() {
+        return this.editingNote;
+      },
+      set(note) {
+        this.updateNote(note);
+      }
+    },
     isNewNote() {
       return this.$route.params.id === NEW_NOTE_KEY;
-    }
-  },
-  watch: {
-    note: {
-      handler(note, oldValue) {
-        if (oldValue) {
-          this.updateNote(note);
-        }
-      },
-      deep: true
     }
   },
   created() {

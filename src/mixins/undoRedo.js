@@ -23,9 +23,7 @@ export default {
   created() {
     this.unsubscribe = this.$store.subscribe(mutation => {
       if (mutation.type === UPDATE_NOTE) {
-        const { type, payload } = mutation;
-
-        this.done.push({ type, payload: copyNote(payload) });
+        this.done.push(copyNote(mutation.payload));
       }
       if (this.newMutation) {
         this.undone = [];
@@ -37,9 +35,9 @@ export default {
   },
   methods: {
     handleUndo() {
+      // this.$store.commit(UPDATE_NOTE, this.done.pop());
     },
 
-    handleRedo() {
-    }
+    handleRedo() {}
   }
 };
