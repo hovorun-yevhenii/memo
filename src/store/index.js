@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersistence from "vuex-persist";
-import { copyNote } from "../utils";
+import { cloneNote } from "../utils";
 import { VUEX_PERSIST_KEY } from "../constants";
 import {
   SET_NOTES,
@@ -39,7 +39,7 @@ export default new Vuex.Store({
       state.notes.splice(index, 1);
     },
     [SET_EDITING_NOTE](state, note) {
-      state.editingNote = copyNote(note);
+      state.editingNote = cloneNote(note);
     },
     [UPDATE_NOTE](state, note) {
       state.editingNote = note;

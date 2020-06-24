@@ -3,7 +3,7 @@
     <app-header />
     <div class="container">
       <transition name="page" mode="out-in">
-        <router-view></router-view>
+        <router-view />
       </transition>
     </div>
   </div>

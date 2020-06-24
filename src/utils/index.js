@@ -1,24 +1,12 @@
 const createMockNote = () => ({
   id: `${Date.now()}_${(Math.random() * 10e6).toFixed()}`,
   title: "This is title",
-  items: [
-    {
-      text: "This is first item",
+  items: Array(4)
+    .fill("")
+    .map((_, index) => ({
+      text: `This is item number ${index}`,
       checked: false
-    },
-    {
-      text: "This is second item",
-      checked: false
-    },
-    {
-      text: "This is third one",
-      checked: false
-    },
-    {
-      text: "And this is fourth one",
-      checked: false
-    }
-  ]
+    }))
 });
 
 const createTestNotes = qty =>
@@ -37,14 +25,12 @@ const getNoteSchema = () => ({
   items: [getTodoSchema()]
 });
 
-const copyNote = note => {
+const cloneNote = note => {
   if (note) {
     return {
       ...note,
       items: note.items.map(item => ({ ...item }))
     };
-  } else {
-    return null;
   }
 };
 
@@ -52,4 +38,4 @@ const truncate = (text = "", length) => {
   return text.length > length ? text.substring(0, length) + "..." : text;
 };
 
-export { copyNote, truncate, createTestNotes, getNoteSchema, getTodoSchema };
+export { cloneNote, truncate, createTestNotes, getNoteSchema, getTodoSchema };

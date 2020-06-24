@@ -1,6 +1,6 @@
 import { MAX_MUTATION_STACK_SIZE } from "../constants";
 import { UPDATE_NOTE } from "../store/mutation-types";
-import { copyNote } from "../utils";
+import { cloneNote } from "../utils";
 
 export default {
   data() {
@@ -23,7 +23,7 @@ export default {
   created() {
     this.unsubscribe = this.$store.subscribe(mutation => {
       if (mutation.type === UPDATE_NOTE) {
-        this.done.push(copyNote(mutation.payload));
+        this.done.push(cloneNote(mutation.payload));
       }
       if (this.newMutation) {
         this.undone = [];
