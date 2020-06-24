@@ -1,17 +1,13 @@
 # MEMO
+Single page application for notes made with [Vue.js](https://vuejs.org/)
 
-## Project setup
+#### Project setup
 ```
+// install dependencies
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
+// then
 npm run serve
-```
-
-### Compiles and minifies for production
-```
+// for compiles and hot-reloads for development or
 npm run build
+// for compiles and minifies for production
 ```
-
