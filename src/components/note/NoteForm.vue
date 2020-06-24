@@ -3,6 +3,7 @@
     <div class="form__title">
       <text-area
         v-model="note.title"
+        @input="$emit('change')"
         :max-length="MAX_NOTE_TITLE_LENGTH"
         autofocus
         required
@@ -15,10 +16,12 @@
       <app-checkbox
         class="form__todo-checkbox"
         v-model="note.items[index].checked"
+        @input="$emit('change')"
       />
       <text-area
         class="form__todo-text"
         v-model="note.items[index].text"
+        @input="$emit('change')"
         placeholder="Type todo text here..."
       />
       <icon-button
@@ -73,18 +76,17 @@ export default {
     note: {
       get() {
         return this.value;
-      },
-      set(note) {
-        this.$emit("input", note);
       }
     }
   },
   methods: {
     addTodoItem() {
       this.note.items.push(getTodoSchema());
+      this.$emit("change");
     },
     removeTodoItem(index) {
       this.note.items.splice(index, 1);
+      this.$emit("change");
     },
     validate() {
       return new Promise(resolve => resolve(this.$refs.title.validate()));

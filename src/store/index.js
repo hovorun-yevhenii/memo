@@ -1,15 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersistence from "vuex-persist";
-import { cloneNote } from "../utils";
 import { VUEX_PERSIST_KEY } from "../constants";
-import {
-  SET_NOTES,
-  REMOVE_NOTE,
-  SET_EDITING_NOTE,
-  UPDATE_NOTE,
-  SAVE_NOTE
-} from "./mutation-types";
+import { SET_NOTES, REMOVE_NOTE, SAVE_NOTE } from "./mutation-types";
 
 const vuexLocal = new VuexPersistence({
   key: VUEX_PERSIST_KEY,
@@ -21,12 +14,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [vuexLocal.plugin],
   state: {
-    notes: [],
-    editingNote: null
+    notes: []
   },
   getters: {
     notes: state => state.notes,
-    editingNote: state => state.editingNote,
     getNoteById: state => id => state.notes.find(note => note.id === id)
   },
   mutations: {
@@ -38,14 +29,7 @@ export default new Vuex.Store({
 
       state.notes.splice(index, 1);
     },
-    [SET_EDITING_NOTE](state, note) {
-      state.editingNote = cloneNote(note);
-    },
-    [UPDATE_NOTE](state, note) {
-      state.editingNote = note;
-    },
-    [SAVE_NOTE](state) {
-      const note = state.editingNote;
+    [SAVE_NOTE](state, note) {
       const index = state.notes.findIndex(item => item.id === note.id);
       const order = index > -1 ? index : state.notes.length;
 

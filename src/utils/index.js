@@ -14,7 +14,7 @@ export const createTestNotes = qty =>
     .fill("")
     .map(createMockNote);
 
-const getTodoSchema = () => ({
+export const getTodoSchema = () => ({
   text: "",
   checked: false
 });
@@ -26,12 +26,13 @@ export const getNoteSchema = () => ({
 });
 
 export const cloneNote = note => {
-  if (note) {
-    return {
-      ...note,
-      items: note.items.map(item => ({ ...item }))
-    };
-  }
+  return JSON.parse(JSON.stringify(note));
+  // if (note) {
+  //   return {
+  //     ...note,
+  //     items: note.items.map(item => ({ ...item }))
+  //   };
+  // }
 };
 
 export const truncate = (text = "", length) => {

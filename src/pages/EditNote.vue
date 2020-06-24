@@ -1,6 +1,11 @@
 <template>
   <div class="edit-note" v-if="note">
-    <note-form class="edit-note__form" ref="form" v-model="note" />
+    <note-form
+      class="edit-note__form"
+      ref="form"
+      v-model="note"
+      @change="handleChange"
+    />
 
     <div class="edit-note__actions">
       <div>
@@ -33,20 +38,13 @@
 import NoteForm from "../components/note/NoteForm.vue";
 import TextButton from "../components/common/TextButton.vue";
 import ConfirmDialog from "../components/common/modals/ConfirmDialog.vue";
-import undoRedo from "../mixins/undoRedo";
 import { mapGetters, mapMutations } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
-import { getNoteSchema } from "../utils";
-import {
-  UPDATE_NOTE,
-  SET_EDITING_NOTE,
-  SAVE_NOTE,
-  REMOVE_NOTE
-} from "../store/mutation-types";
+import { cloneNote, getNoteSchema } from "../utils";
+import { SAVE_NOTE, REMOVE_NOTE } from "../store/mutation-types";
 
 export default {
   name: "EditNote",
-  mixins: [undoRedo],
   components: {
     NoteForm,
     TextButton,
@@ -54,43 +52,45 @@ export default {
   },
   data() {
     return {
+      note: {},
+      history: [],
       showConfirmDialog: false
     };
   },
   computed: {
-    ...mapGetters(["getNoteById", "editingNote"]),
-    note: {
-      get() {
-        return this.editingNote;
-      },
-      set(note) {
-        this.updateNote(note);
-      }
-    },
+    ...mapGetters(["getNoteById"]),
     isNewNote() {
       return this.$route.params.id === NEW_NOTE_KEY;
+    },
+    canUndo() {
+      return this.history.length;
+    },
+    canRedo() {
+      return false;
     }
   },
   created() {
     this.setNote();
-  },
-  beforeDestroy() {
-    this.setEditingNote(null);
   },
   beforeRouteLeave(to, from, next) {
     next();
   },
   methods: {
     ...mapMutations({
-      setEditingNote: SET_EDITING_NOTE,
-      updateNote: UPDATE_NOTE,
       saveNote: SAVE_NOTE,
       removeNote: REMOVE_NOTE
     }),
+    handleChange() {
+      this.history.push(cloneNote(this.note));
+    },
+    handleUndo() {
+      this.note = this.history.pop();
+    },
+    handleRedo() {},
     handleSave() {
       this.$refs.form.validate().then(isValid => {
         if (isValid) {
-          this.saveNote();
+          this.saveNote(this.note);
           this.navigateToList();
         }
       });
@@ -113,7 +113,7 @@ export default {
         : this.getNoteById(this.$route.params.id);
 
       if (note) {
-        this.setEditingNote(note);
+        this.note = cloneNote({ ...note, version: 1 });
       } else {
         this.navigateToList();
       }
