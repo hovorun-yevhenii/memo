@@ -1,13 +1,15 @@
 # MEMO
 Single page application for notes made with [Vue.js](https://vuejs.org/)
 
+[Demo](https://memo-tr.herokuapp.com/)
+
 #### Project setup
 ```
-// install dependencies
+# install dependencies
 npm install
-// then
-npm run serve
-// for compiles and hot-reloads for development or
+# then
+npm run start
+# for compiles and hot-reloads for development or
 npm run build
-// for compiles and minifies for production
+# for compiles and minifies for production
 ```
