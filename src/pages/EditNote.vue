@@ -16,36 +16,32 @@
       <todo-list v-model="note.todoList" @change="handleChange" />
     </div>
 
-    <div class="form__actions">
-      <div>
-        <text-button text="undo" :disabled="!canUndo" @click="handleUndo" />
-        <text-button text="redo" :disabled="!canRedo" @click="handleRedo" />
-        <text-button color="primary" text="revert" @click="handleRevert" />
-      </div>
-
-      <div>
-        <text-button
-          v-if="!isNewNote"
-          color="danger"
-          text="delete"
-          @click="openConfirmDialog"
-        />
-        <text-button color="accent" text="save" @click="handleSave" />
-      </div>
-    </div>
+    <form-actions
+      :canUndo="canUndo"
+      :canRedo="canRedo"
+      :canRevert="canRevert"
+      :isNewNote="isNewNote"
+      @undo="handleUndo"
+      @redo="handleRedo"
+      @discard="handleDiscard"
+      @revert="handleRevert"
+      @remove="handleRemove"
+      @save="handleSave"
+    />
 
     <confirm-dialog
       v-if="showConfirmDialog"
       :note="note"
+      :type="confirmType"
+      :on-confirm="onConfirm"
       @cancel="closeConfirmDialog"
-      @confirm="handleRemove"
     />
   </form>
 </template>
 
 <script>
 import TodoList from "../components/note/form/TodoList.vue";
-import TextButton from "../components/common/TextButton.vue";
+import FormActions from "../components/note/form/FormActions.vue";
 import TextArea from "../components/common/TextArea.vue";
 import ConfirmDialog from "../components/common/modals/ConfirmDialog.vue";
 import { mapGetters, mapMutations } from "vuex";
@@ -62,14 +58,18 @@ export default {
   name: "EditNote",
   components: {
     TodoList,
-    TextButton,
+    FormActions,
     TextArea,
     ConfirmDialog
   },
   data() {
     return {
       note: {},
-      history: [],
+      initialNote: {},
+      done: [],
+      undone: [],
+      confirmType: "",
+      onConfirm: null,
       showConfirmDialog: false,
       MAX_NOTE_TITLE_LENGTH,
       MAX_TODO_TEXT_LENGTH,
@@ -82,10 +82,13 @@ export default {
       return this.$route.params.id === NEW_NOTE_KEY;
     },
     canUndo() {
-      return this.history.length;
+      return this.done.length;
     },
     canRedo() {
       return false;
+    },
+    canRevert() {
+      return true;
     }
   },
   created() {
@@ -100,12 +103,35 @@ export default {
       removeNote: REMOVE_NOTE
     }),
     handleChange() {
-      this.history.push(cloneNote(this.note));
+      this.done.push(cloneNote(this.note));
     },
+
     handleUndo() {
-      this.note = this.history.pop();
+      this.note = this.done.pop();
     },
     handleRedo() {},
+
+    handleDiscard() {
+      this.confirmType = "discard";
+      this.showConfirmDialog = true;
+
+      this.onConfirm = () => {
+        this.closeConfirmDialog();
+        this.navigateToList();
+      };
+    },
+    handleRevert() {
+      this.confirmType = "revert";
+      this.showConfirmDialog = true;
+
+      this.onConfirm = () => {
+        this.closeConfirmDialog();
+        this.done = [];
+        this.undone = [];
+        this.note = this.initialNote;
+      };
+    },
+
     handleSave() {
       const isValid = this.$refs.title.validate();
 
@@ -114,18 +140,24 @@ export default {
         this.navigateToList();
       }
     },
-    handleRevert() {},
+
     handleRemove() {
-      this.removeNote(this.note.id);
-      this.closeConfirmDialog();
-      this.navigateToList();
-    },
-    openConfirmDialog() {
+      this.confirmType = "remove";
       this.showConfirmDialog = true;
+
+      this.onConfirm = () => {
+        this.removeNote(this.note.id);
+        this.closeConfirmDialog();
+        this.navigateToList();
+      };
     },
+
     closeConfirmDialog() {
       this.showConfirmDialog = false;
+      this.confirmType = "";
+      this.onConfirm = null;
     },
+
     setNote() {
       const note = this.isNewNote
         ? getNoteSchema()
@@ -133,10 +165,12 @@ export default {
 
       if (note) {
         this.note = cloneNote(note);
+        this.initialNote = cloneNote(note);
       } else {
         this.navigateToList();
       }
     },
+
     navigateToList() {
       this.$router.push("/");
     }
@@ -168,17 +202,6 @@ export default {
     margin-bottom: 24px;
     font-size: 18px;
     font-weight: bold;
-  }
-  &__actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 500px;
-    padding: 32px 0;
-    margin: 0 auto;
-    * {
-      margin: 8px 8px 0 8px;
-    }
   }
 }
 </style>
