@@ -1,10 +1,10 @@
 export const createMockNote = () => ({
   id: `${Date.now()}_${(Math.random() * 10e6).toFixed()}`,
   title: "This is title",
-  items: Array(4)
+  todoList: Array(4)
     .fill("")
     .map((_, index) => ({
-      text: `This is item number ${index}`,
+      text: `This is todo number ${index}`,
       checked: false
     }))
 });
@@ -22,7 +22,7 @@ export const getTodoSchema = () => ({
 export const getNoteSchema = () => ({
   id: `${Date.now()}_${(Math.random() * 10e6).toFixed()}`,
   title: "",
-  items: [getTodoSchema()]
+  todoList: [getTodoSchema()]
 });
 
 export const cloneNote = note => {
@@ -30,7 +30,7 @@ export const cloneNote = note => {
   // if (note) {
   //   return {
   //     ...note,
-  //     items: note.items.map(item => ({ ...item }))
+  //     todoList: note.todoList.map(item => ({ ...item }))
   //   };
   // }
 };

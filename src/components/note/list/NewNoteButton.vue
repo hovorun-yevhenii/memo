@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { NEW_NOTE_KEY } from "../../constants";
+import { NEW_NOTE_KEY } from "../../../constants";
 
 export default {
   name: "NewNoteButton",
@@ -22,8 +22,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../style/variables";
-@import "../../style/mixins";
+@import "../../../style/variables";
+@import "../../../style/mixins";
 
 .new-note {
   @include empty-button;

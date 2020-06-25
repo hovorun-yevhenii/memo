@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import NoteCard from "../components/note/NoteCard.vue";
-import NewNoteButton from "../components/note/NewNoteButton.vue";
+import NoteCard from "../components/note/list/NoteCard.vue";
+import NewNoteButton from "../components/note/list/NewNoteButton.vue";
 import ConfirmDialog from "../components/common/modals/ConfirmDialog.vue";
 import { mapGetters, mapMutations } from "vuex";
 import { REMOVE_NOTE } from "../store/mutation-types";

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import IconButton from "../common/IconButton.vue";
+import IconButton from "../../common/IconButton.vue";
 export default {
   name: "NoteCardActions",
   props: {
@@ -49,8 +49,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../style/variables";
-@import "../../style/mixins";
+@import "../../../style/variables";
+@import "../../../style/mixins";
 
 $padding: 18px;
 

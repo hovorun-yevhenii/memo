@@ -10,9 +10,9 @@
       />
     </div>
 
-    <div v-for="(item, index) in itemsToDisplay" :key="index" class="todo">
-      <app-checkbox class="todo__checkbox" :value="item.checked" disabled />
-      <div class="todo__text">{{ item.text }}</div>
+    <div v-for="(todo, index) in itemsToDisplay" :key="index" class="todo">
+      <app-checkbox class="todo__checkbox" :value="todo.checked" disabled />
+      <div class="todo__text">{{ todo.text }}</div>
     </div>
     <div v-if="restItemsCount" class="todo__rest">
       and {{ restItemsCount }} more
@@ -21,14 +21,14 @@
 </template>
 
 <script>
-import AppCheckbox from "../common/AppCheckbox.vue";
+import AppCheckbox from "../../common/AppCheckbox.vue";
 import NoteCardActions from "./NoteCardActions.vue";
-import { truncate } from "../../utils";
+import { truncate } from "../../../utils";
 import {
-  LIST_VIEW_ITEMS_COUNT,
+  LIST_VIEW_MAX_TODO_COUNT,
   SHORT_TITLE_LENGTH,
-  SHORT_TEXT_LENGTH,
-} from "../../constants";
+  SHORT_TEXT_LENGTH
+} from "../../../constants";
 
 export default {
   name: "NoteCard",
@@ -44,16 +44,18 @@ export default {
   },
   computed: {
     itemsToDisplay() {
-      return this.note.items.slice(0, LIST_VIEW_ITEMS_COUNT).map(item => ({
-        ...item,
-        text: truncate(item.text, SHORT_TEXT_LENGTH)
-      }));
+      return this.note.todoList
+        .slice(0, LIST_VIEW_MAX_TODO_COUNT)
+        .map(todo => ({
+          ...todo,
+          text: truncate(todo.text, SHORT_TEXT_LENGTH)
+        }));
     },
     title() {
       return truncate(this.note.title, SHORT_TITLE_LENGTH);
     },
     restItemsCount() {
-      return this.note.items.length - this.itemsToDisplay.length;
+      return this.note.todoList.length - this.itemsToDisplay.length;
     }
   },
   methods: {
@@ -68,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../style/variables";
+@import "../../../style/variables";
 
 .note {
   display: flex;

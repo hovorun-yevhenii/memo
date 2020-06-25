@@ -1,6 +1,6 @@
 <template>
-  <div class="edit-note" v-if="note">
-    <form class="edit-note__form form">
+  <form class="form" v-if="note">
+    <div class="form__body">
       <div class="form__title">
         <text-area
           v-model="note.title"
@@ -13,35 +13,10 @@
         />
       </div>
 
-      <div class="form__todo" v-for="(todo, index) in note.items" :key="index">
-        <app-checkbox
-          class="form__todo-checkbox"
-          v-model="todo.checked"
-          @input="handleChange"
-        />
-        <text-area
-          class="form__todo-text"
-          v-model="todo.text"
-          @input="handleChange"
-          placeholder="Type todo text here..."
-        />
-        <icon-button
-          icon="close"
-          title="Remove item"
-          @click="removeTodoItem(index)"
-        />
-      </div>
+      <todo-list v-model="note.todoList" @change="handleChange" />
+    </div>
 
-      <icon-button
-        v-if="note.items.length < MAX_TODO_ITEMS_COUNT"
-        class="form__add-todo"
-        icon="add_circle_outline"
-        title="Add todo item"
-        @click="addTodoItem"
-      />
-    </form>
-
-    <div class="edit-note__actions">
+    <div class="form__actions">
       <div>
         <text-button text="undo" :disabled="!canUndo" @click="handleUndo" />
         <text-button text="redo" :disabled="!canRedo" @click="handleRedo" />
@@ -65,18 +40,17 @@
       @cancel="closeConfirmDialog"
       @confirm="handleRemove"
     />
-  </div>
+  </form>
 </template>
 
 <script>
+import TodoList from "../components/note/form/TodoList.vue";
 import TextButton from "../components/common/TextButton.vue";
-import IconButton from "../components/common/IconButton.vue";
 import TextArea from "../components/common/TextArea.vue";
-import AppCheckbox from "../components/common/AppCheckbox.vue";
 import ConfirmDialog from "../components/common/modals/ConfirmDialog.vue";
 import { mapGetters, mapMutations } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
-import {cloneNote, getNoteSchema, getTodoSchema} from "../utils";
+import { cloneNote, getNoteSchema } from "../utils";
 import { SAVE_NOTE, REMOVE_NOTE } from "../store/mutation-types";
 import {
   MAX_NOTE_TITLE_LENGTH,
@@ -87,10 +61,9 @@ import {
 export default {
   name: "EditNote",
   components: {
+    TodoList,
     TextButton,
-    IconButton,
     TextArea,
-    AppCheckbox,
     ConfirmDialog
   },
   data() {
@@ -159,18 +132,10 @@ export default {
         : this.getNoteById(this.$route.params.id);
 
       if (note) {
-        this.note = cloneNote({ ...note, version: 1 });
+        this.note = cloneNote(note);
       } else {
         this.navigateToList();
       }
-    },
-    addTodoItem() {
-      this.note.items.push(getTodoSchema());
-      this.$emit("change");
-    },
-    removeTodoItem(index) {
-      this.note.items.splice(index, 1);
-      this.$emit("change");
     },
     navigateToList() {
       this.$router.push("/");
@@ -183,7 +148,27 @@ export default {
 @import "../style/variables";
 @import "../style/mixins";
 
-.edit-note {
+.form {
+  &__body {
+    background-color: $default-bg;
+    border: 1px solid $border-color;
+    max-width: $breakpoint-phone;
+    margin: 48px auto 0;
+    padding: 32px 16px 16px;
+    box-sizing: border-box;
+
+    @media (max-width: $breakpoint-phone) {
+      margin: 0;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+    }
+  }
+  &__title {
+    margin-bottom: 24px;
+    font-size: 18px;
+    font-weight: bold;
+  }
   &__actions {
     display: flex;
     flex-wrap: wrap;
@@ -194,40 +179,6 @@ export default {
     * {
       margin: 8px 8px 0 8px;
     }
-  }
-}
-
-.form {
-  background-color: $default-bg;
-  border: 1px solid $border-color;
-  max-width: $breakpoint-phone;
-  margin: 48px auto 0;
-  padding: 32px 16px 16px;
-  box-sizing: border-box;
-  &__title {
-    margin-bottom: 24px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  &__todo {
-    display: flex;
-    margin-bottom: 10px;
-  }
-  &__todo-checkbox {
-    flex-shrink: 0;
-  }
-  &__todo-text {
-    flex-grow: 1;
-  }
-  &__add-todo {
-    width: 34px;
-  }
-
-  @media (max-width: $breakpoint-phone) {
-    margin: 0;
-    border-top: none;
-    border-right: none;
-    border-left: none;
   }
 }
 </style>

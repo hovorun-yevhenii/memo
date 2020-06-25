@@ -1,4 +1,4 @@
-export const LIST_VIEW_ITEMS_COUNT = 3;
+export const LIST_VIEW_MAX_TODO_COUNT = 3;
 export const VUEX_PERSIST_KEY = "memoNotes";
 export const NEW_NOTE_KEY = "new";
 export const MAX_MUTATION_STACK_SIZE = 512;
