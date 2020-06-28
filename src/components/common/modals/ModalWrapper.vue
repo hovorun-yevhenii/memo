@@ -41,8 +41,8 @@ export default {
     handleClick() {
       this.$emit("cancel");
     },
-    handleKeyPress({ keyCode }) {
-      if (keyCode === KEYBOARD_CODES.escape) {
+    handleKeyPress({ code, keyCode }) {
+      if (KEYBOARD_CODES.escape.includes(code || keyCode)) {
         this.$emit("cancel");
       }
     }

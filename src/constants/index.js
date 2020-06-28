@@ -8,5 +8,6 @@ export const TODO_ITEMS_MAX_COUNT = 32;
 export const SHORT_TITLE_LENGTH = 40;
 export const SHORT_TEXT_LENGTH = 50;
 export const KEYBOARD_CODES = {
-  escape: 27
+  escape: [27, "Escape"],
+  z: [90, "KeyZ"]
 };

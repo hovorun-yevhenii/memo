@@ -12,6 +12,7 @@
       class="text-area__field"
       :data-placeholder="placeholder"
       ref="input"
+      :key="value"
       v-once
       v-text="value"
       v-on="required ? { focus: handleFocus } : {}"

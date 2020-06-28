@@ -1,11 +1,12 @@
 import { cloneNote } from "../utils";
-import { CHANGES_STACK_MAX_SIZE } from "../constants";
+import { CHANGES_STACK_MAX_SIZE, KEYBOARD_CODES } from "../constants";
 
 export default {
   data() {
     return {
       done: [],
-      changeCounter: 0
+      changeCounter: 0,
+      boundKeyHandler: this.handleKeydown.bind(this)
     };
   },
   computed: {
@@ -15,6 +16,12 @@ export default {
     canRedo() {
       return this.changeCounter < this.done.length - 1;
     }
+  },
+  created() {
+    document.addEventListener("keydown", this.boundKeyHandler);
+  },
+  destroyed() {
+    document.removeEventListener("keydown", this.boundKeyHandler);
   },
   methods: {
     handleChange() {
@@ -29,9 +36,29 @@ export default {
       this.changeCounter -= 1;
       this.note = cloneNote(this.done[this.changeCounter]);
     },
+
     handleRedo() {
       this.changeCounter += 1;
       this.note = cloneNote(this.done[this.changeCounter]);
+    },
+
+    handleKeydown(event) {
+      if (!KEYBOARD_CODES.z.includes(event.code || event.keyCode)) {
+        return;
+      }
+
+      const { metaKey, ctrlKey, shiftKey: shift } = event;
+      const ctrl = metaKey || ctrlKey;
+
+      if (ctrl || shift) {
+        event.preventDefault();
+      }
+      if (ctrl && !shift && this.canUndo) {
+        this.handleUndo();
+      }
+      if (ctrl && shift && this.canRedo) {
+        this.handleRedo();
+      }
     }
   }
 };
