@@ -12,7 +12,6 @@
       class="text-area__field"
       :data-placeholder="placeholder"
       ref="input"
-      :key="value"
       v-once
       v-text="value"
       v-on="required ? { focus: handleFocus } : {}"
@@ -60,7 +59,7 @@ export default {
   watch: {
     value(newValue) {
       if (document.activeElement !== this.$refs.input) {
-        this.$refs.input.innerHTML = newValue;
+        this.$refs.input.textContent = newValue;
       }
     }
   },
