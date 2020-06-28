@@ -87,6 +87,8 @@ export default {
   display: flex;
   margin-bottom: 10px;
   &__checkbox {
+    position: relative;
+    top: 2px;
     flex-shrink: 0;
   }
   &__text {

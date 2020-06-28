@@ -83,7 +83,7 @@ export default {
       return this.$route.params.id === NEW_NOTE_KEY;
     },
     canRevert() {
-      return true;
+      return this.history.length > 1;
     }
   },
   created() {
@@ -102,18 +102,18 @@ export default {
       this.confirmType = "discard";
       this.showConfirmDialog = true;
 
-      this.onConfirm = () => {
-        this.closeConfirmDialog();
-        this.navigateToList();
-      };
+      this.onConfirm = this.navigateToList;
     },
+
     handleRevert() {
       this.confirmType = "revert";
       this.showConfirmDialog = true;
 
       this.onConfirm = () => {
         this.closeConfirmDialog();
-        this.done = [];
+        this.history.splice(1);
+        this.changeCounter = 0;
+        this.note = cloneNote(this.history[this.changeCounter]);
       };
     },
 
@@ -132,7 +132,6 @@ export default {
 
       this.onConfirm = () => {
         this.removeNote(this.note.id);
-        this.closeConfirmDialog();
         this.navigateToList();
       };
     },
@@ -150,7 +149,7 @@ export default {
 
       if (note) {
         this.note = cloneNote(note);
-        this.done.push(cloneNote(this.note));
+        this.history.push(cloneNote(this.note));
       } else {
         this.navigateToList();
       }
