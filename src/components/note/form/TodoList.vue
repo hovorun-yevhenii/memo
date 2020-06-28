@@ -22,7 +22,7 @@
     </div>
 
     <icon-button
-      v-if="todoList.length < MAX_TODO_ITEMS_COUNT"
+      v-if="todoList.length < TODO_ITEMS_MAX_COUNT"
       class="list__add"
       icon="add_circle_outline"
       title="Add todo"
@@ -55,7 +55,7 @@ export default {
   },
   data() {
     return {
-      MAX_TODO_ITEMS_COUNT: 20
+      TODO_ITEMS_MAX_COUNT: 20
     };
   },
   methods: {

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { MAX_TODO_TEXT_LENGTH } from "../../constants";
+import { TODO_TEXT_MAX_LENGTH } from "../../constants";
 
 export default {
   name: "TextArea",
@@ -36,7 +36,7 @@ export default {
     },
     maxLength: {
       type: Number,
-      default: MAX_TODO_TEXT_LENGTH
+      default: TODO_TEXT_MAX_LENGTH
     },
     placeholder: {
       type: String,

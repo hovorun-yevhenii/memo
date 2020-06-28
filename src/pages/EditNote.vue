@@ -5,7 +5,7 @@
         <text-area
           v-model="note.title"
           @input="handleChange"
-          :max-length="MAX_NOTE_TITLE_LENGTH"
+          :max-length="NOTE_TITLE_MAX_LENGTH"
           autofocus
           required
           ref="title"
@@ -44,14 +44,17 @@ import TodoList from "../components/note/form/TodoList.vue";
 import FormActions from "../components/note/form/FormActions.vue";
 import TextArea from "../components/common/TextArea.vue";
 import ConfirmDialog from "../components/common/modals/ConfirmDialog.vue";
+
+import undoRedo from "../mixins/undoRedo";
+
 import { mapGetters, mapMutations } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
 import { cloneNote, getNoteSchema } from "../utils";
 import { SAVE_NOTE, REMOVE_NOTE } from "../store/mutation-types";
 import {
-  MAX_NOTE_TITLE_LENGTH,
-  MAX_TODO_TEXT_LENGTH,
-  MAX_TODO_ITEMS_COUNT
+  NOTE_TITLE_MAX_LENGTH,
+  TODO_TEXT_MAX_LENGTH,
+  TODO_ITEMS_MAX_COUNT
 } from "../constants";
 
 export default {
@@ -62,30 +65,22 @@ export default {
     TextArea,
     ConfirmDialog
   },
+  mixins: [undoRedo],
   data() {
     return {
       note: {},
-      initialNote: {},
-      done: [],
-      undone: [],
       confirmType: "",
       onConfirm: null,
       showConfirmDialog: false,
-      MAX_NOTE_TITLE_LENGTH,
-      MAX_TODO_TEXT_LENGTH,
-      MAX_TODO_ITEMS_COUNT
+      NOTE_TITLE_MAX_LENGTH,
+      TODO_TEXT_MAX_LENGTH,
+      TODO_ITEMS_MAX_COUNT
     };
   },
   computed: {
     ...mapGetters(["getNoteById"]),
     isNewNote() {
       return this.$route.params.id === NEW_NOTE_KEY;
-    },
-    canUndo() {
-      return this.done.length;
-    },
-    canRedo() {
-      return false;
     },
     canRevert() {
       return true;
@@ -102,14 +97,6 @@ export default {
       saveNote: SAVE_NOTE,
       removeNote: REMOVE_NOTE
     }),
-    handleChange() {
-      this.done.push(cloneNote(this.note));
-    },
-
-    handleUndo() {
-      this.note = this.done.pop();
-    },
-    handleRedo() {},
 
     handleDiscard() {
       this.confirmType = "discard";
@@ -127,8 +114,6 @@ export default {
       this.onConfirm = () => {
         this.closeConfirmDialog();
         this.done = [];
-        this.undone = [];
-        this.note = this.initialNote;
       };
     },
 
@@ -165,7 +150,7 @@ export default {
 
       if (note) {
         this.note = cloneNote(note);
-        this.initialNote = cloneNote(note);
+        this.done.push(cloneNote(this.note));
       } else {
         this.navigateToList();
       }

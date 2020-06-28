@@ -26,13 +26,12 @@ export const getNoteSchema = () => ({
 });
 
 export const cloneNote = note => {
-  return JSON.parse(JSON.stringify(note));
-  // if (note) {
-  //   return {
-  //     ...note,
-  //     todoList: note.todoList.map(item => ({ ...item }))
-  //   };
-  // }
+  if (note) {
+    return {
+      ...note,
+      todoList: note.todoList.map(item => ({ ...item }))
+    };
+  }
 };
 
 export const truncate = (text = "", length) => {
