@@ -1,17 +1,13 @@
 <template>
   <label
     class="checkbox"
-    :class="{ disabled }"
+    :class="{ disabled, checked }"
     @keypress.enter="checked = !checked"
   >
     <transition name="checkbox" mode="out-in">
       <span class="checkbox__icon" :key="checked">
-        <i v-if="checked" class="material-icons checked">
-          check_circle_outline
-        </i>
-        <i v-else class="material-icons">
-          panorama_fish_eye
-        </i>
+        <svg-checked v-if="checked" />
+        <svg-circle v-else />
       </span>
     </transition>
 
@@ -63,13 +59,13 @@ export default {
   &.disabled {
     pointer-events: none;
   }
-  & * {
-    & {
-      color: $primary-color;
-    }
-    &.checked {
-      color: $accent-color;
-    }
+
+  &::v-deep svg {
+    color: $primary-color;
+  }
+
+  &.checked::v-deep svg {
+    color: $accent-color;
   }
 
   &:focus-within {

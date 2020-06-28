@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto:200,400,800&display=swap&subset=cyrillic');
 @import "reset";
 @import "variables";
 @import "transitions";
-
 
 body {
   &::-webkit-scrollbar {
@@ -21,4 +21,17 @@ body {
 .container {
   max-width: $breakpoint-desktop;
   margin: 0 auto;
+}
+
+[id="app"] {
+  min-height: 100vh;
+  background-color: $main-dark;
+  color: $main-text;
+  &,
+  & * {
+    font-family: $roboto;
+    &::selection {
+      background-color: rgba($accent-color, 0.35);
+    }
+  }
 }

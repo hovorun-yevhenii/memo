@@ -6,7 +6,7 @@
     type="button"
     @click="handleClick"
   >
-    <i class="material-icons">{{ icon }}</i>
+    <component :is="`svg-${icon}`" />
   </button>
 </template>
 
@@ -51,6 +51,7 @@ export default {
   transition: background-color $transition-duration;
 
   & * {
+    width: 100%;
     color: $border-color;
   }
 

@@ -43,6 +43,7 @@ export default {
   text-align: center;
   font-size: 12px;
   font-weight: bold;
+  color: $main-text;
   transition: $transition-duration;
 
   &.primary {

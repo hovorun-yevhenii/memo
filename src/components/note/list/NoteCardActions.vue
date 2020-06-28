@@ -1,12 +1,7 @@
 <template>
   <button class="actions">
     <span class="actions__wrapper">
-      <icon-button
-        class="actions__more"
-        icon="more_horiz"
-        color="primary"
-        disabled
-      />
+      <icon-button class="actions__more" icon="more" color="primary" disabled />
       <icon-button
         class="actions__edit"
         icon="create"
@@ -16,7 +11,7 @@
       />
       <icon-button
         class="actions__remove"
-        icon="delete_outline"
+        icon="delete"
         color="danger"
         title="Remove"
         @click="handleRemove"

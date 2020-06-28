@@ -1,7 +1,7 @@
 <template>
   <button class="new-note" @click="handleClick">
     Create new note
-    <i class="material-icons">add_circle_outline</i>
+    <svg-add />
   </button>
 </template>
 
@@ -46,24 +46,24 @@ export default {
     margin: 8px;
   }
 
-  .material-icons {
+  ::v-deep svg {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 72px;
     margin-top: 16px;
-    font-size: 72px;
     color: $dark-text;
     transition: $transition-duration ease;
   }
 
   &:hover {
     opacity: 1;
-    .material-icons {
-      transform: scale(1.1);
-      color: $accent-color;
-    }
+  }
+
+  &::v-deep:hover svg {
+    transform: scale(1.1);
+    color: $accent-color;
   }
 }
 </style>

@@ -24,7 +24,7 @@
     <icon-button
       v-if="todoList.length < TODO_ITEMS_MAX_COUNT"
       class="list__add"
-      icon="add_circle_outline"
+      icon="add"
       title="Add todo"
       @click="addTodoItem"
     />

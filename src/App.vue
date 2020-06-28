@@ -24,18 +24,4 @@ export default {
 
 <style lang="scss">
 @import "style/global";
-
-[id="app"] {
-  min-height: 100vh;
-  background-color: $main-dark;
-  color: $main-text;
-  &,
-  & * {
-    font-family: $roboto;
-    color: $main-text;
-    &::selection {
-      background-color: rgba($accent-color, 0.35);
-    }
-  }
-}
 </style>
