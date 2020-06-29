@@ -5,15 +5,15 @@ export default {
   data() {
     return {
       history: [],
-      changeCounter: 0
+      changeIndex: 0
     };
   },
   computed: {
     canUndo() {
-      return this.history.length > 1 && this.changeCounter !== 0;
+      return this.changeIndex > 0;
     },
     canRedo() {
-      return this.changeCounter < this.history.length - 1;
+      return this.changeIndex < this.history.length - 1;
     }
   },
   methods: {
@@ -22,18 +22,18 @@ export default {
         this.history = this.history.slice(1);
       }
 
-      this.changeCounter += 1;
-      this.history.splice(this.changeCounter, 0, cloneNote(this.note));
+      this.changeIndex += 1;
+      this.history.splice(this.changeIndex, 0, cloneNote(this.note));
     },
 
     handleUndo() {
-      this.changeCounter -= 1;
-      this.note = cloneNote(this.history[this.changeCounter]);
+      this.changeIndex -= 1;
+      this.note = cloneNote(this.history[this.changeIndex]);
     },
 
     handleRedo() {
-      this.changeCounter += 1;
-      this.note = cloneNote(this.history[this.changeCounter]);
+      this.changeIndex += 1;
+      this.note = cloneNote(this.history[this.changeIndex]);
     }
   }
 };

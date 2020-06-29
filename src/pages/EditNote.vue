@@ -99,27 +99,6 @@ export default {
       removeNote: REMOVE_NOTE
     }),
 
-    handleDiscard() {
-      this.confirmType = "discard";
-      this.showConfirmDialog = true;
-
-      this.onConfirm = () => {
-        this.resetHistory();
-        this.navigateToList();
-      };
-    },
-
-    handleRevert() {
-      this.confirmType = "revert";
-      this.showConfirmDialog = true;
-
-      this.onConfirm = () => {
-        this.closeConfirmDialog();
-        this.resetHistory();
-        this.note = cloneNote(this.history[this.changeCounter]);
-      };
-    },
-
     handleSave() {
       const isValid = this.$refs.title.validate();
 
@@ -138,6 +117,31 @@ export default {
         this.removeNote(this.note.id);
         this.resetHistory();
         this.navigateToList();
+      };
+    },
+
+    handleDiscard() {
+      if (this.canRevert) {
+        this.confirmType = "discard";
+        this.showConfirmDialog = true;
+
+        this.onConfirm = () => {
+          this.resetHistory();
+          this.navigateToList();
+        };
+      } else {
+        this.navigateToList();
+      }
+    },
+
+    handleRevert() {
+      this.confirmType = "revert";
+      this.showConfirmDialog = true;
+
+      this.onConfirm = () => {
+        this.closeConfirmDialog();
+        this.resetHistory();
+        this.note = cloneNote(this.history[this.changeIndex]);
       };
     },
 
@@ -162,7 +166,7 @@ export default {
 
     resetHistory() {
       this.history.splice(1);
-      this.changeCounter = 0;
+      this.changeIndex = 0;
     },
 
     navigateToList() {

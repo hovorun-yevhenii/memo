@@ -29,6 +29,8 @@
       title="Add todo"
       @click="addTodoItem"
     />
+
+    <p v-else class="list__exceeded">Exceeded items quantity</p>
   </div>
 </template>
 
@@ -84,6 +86,10 @@ export default {
 .list {
   &__add {
     width: 34px;
+  }
+  &__exceeded {
+    color: $danger-color;
+    font-size: 12px;
   }
 }
 

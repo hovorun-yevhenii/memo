@@ -55,7 +55,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  width: 320px;
+  max-width: 320px;
   padding: 32px 0;
   margin: 0 auto;
   &__revert {
