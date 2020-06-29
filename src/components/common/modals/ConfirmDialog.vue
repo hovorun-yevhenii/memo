@@ -16,6 +16,8 @@
       </div>
 
       <div v-if="type === 'revert'">Revert all changes?</div>
+
+      <div v-if="type === 'leave'">Discard all changes and leave the page?</div>
     </div>
     <div class="confirm__actions">
       <text-button @click="handleCancel" text="cancel" />

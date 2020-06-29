@@ -11,6 +11,7 @@
         class="todo__text"
         v-model="todo.text"
         @input="handleChange"
+        ref="todoText"
         placeholder="Type todo text here..."
       />
 
@@ -36,6 +37,7 @@ import IconButton from "../../common/IconButton.vue";
 import TextArea from "../../common/TextArea.vue";
 import AppCheckbox from "../../common/AppCheckbox.vue";
 import { getTodoSchema } from "../../../utils";
+import { TODO_ITEMS_MAX_COUNT } from "../../../constants";
 
 export default {
   name: "TodoList",
@@ -55,13 +57,17 @@ export default {
   },
   data() {
     return {
-      TODO_ITEMS_MAX_COUNT: 20
+      TODO_ITEMS_MAX_COUNT
     };
   },
   methods: {
     addTodoItem() {
-      this.todoList.push(getTodoSchema());
+      const length = this.todoList.push(getTodoSchema());
       this.handleChange();
+
+      this.$nextTick(() => {
+        this.$refs.todoText[length - 1].focus();
+      });
     },
     removeTodoItem(index) {
       this.todoList.splice(index, 1);

@@ -2,19 +2,17 @@
   <div class="actions">
     <div>
       <text-button text="undo" :disabled="!canUndo" @click="$emit('undo')" />
-      <text-button text="redo" :disabled="!canRedo" @click="$emit('redo')" />
-    </div>
-
-    <div>
-      <text-button text="discard" @click="$emit('discard')" />
       <text-button
         text="revert"
         :disabled="!canRevert"
         @click="$emit('revert')"
       />
+      <text-button text="redo" :disabled="!canRedo" @click="$emit('redo')" />
     </div>
 
     <div>
+      <text-button text="discard" @click="$emit('discard')" />
+
       <text-button
         v-if="!isNewNote"
         color="danger"

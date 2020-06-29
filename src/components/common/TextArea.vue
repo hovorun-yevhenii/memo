@@ -82,6 +82,9 @@ export default {
         this.$emit("input", value);
       }
     },
+    focus() {
+      this.$refs.input.focus();
+    },
     handleFocus() {
       this.hasError = false;
     },

@@ -51,11 +51,7 @@ import { mapGetters, mapMutations } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
 import { cloneNote, getNoteSchema } from "../utils";
 import { SAVE_NOTE, REMOVE_NOTE } from "../store/mutation-types";
-import {
-  NOTE_TITLE_MAX_LENGTH,
-  TODO_TEXT_MAX_LENGTH,
-  TODO_ITEMS_MAX_COUNT
-} from "../constants";
+import { NOTE_TITLE_MAX_LENGTH, TODO_TEXT_MAX_LENGTH } from "../constants";
 
 export default {
   name: "EditNote",
@@ -73,8 +69,7 @@ export default {
       onConfirm: null,
       showConfirmDialog: false,
       NOTE_TITLE_MAX_LENGTH,
-      TODO_TEXT_MAX_LENGTH,
-      TODO_ITEMS_MAX_COUNT
+      TODO_TEXT_MAX_LENGTH
     };
   },
   computed: {
@@ -90,7 +85,16 @@ export default {
     this.setNote();
   },
   beforeRouteLeave(to, from, next) {
-    next();
+    if (this.canRevert) {
+      this.confirmType = "leave";
+      this.showConfirmDialog = true;
+
+      this.onConfirm = () => {
+        next();
+      };
+    } else {
+      next();
+    }
   },
   methods: {
     ...mapMutations({
