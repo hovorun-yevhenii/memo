@@ -23,7 +23,7 @@
       />
     </div>
 
-    <div class="space-between">
+    <div class="space-evenly">
       <text-button
         v-if="!isNewNote"
         color="danger"
@@ -55,7 +55,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  width: 288px;
+  width: 320px;
   padding: 32px 0;
   margin: 0 auto;
   &__revert {
@@ -66,8 +66,8 @@ export default {
     justify-content: center;
     align-items: center;
   }
-  .space-between {
-    justify-content: space-between;
+  .space-evenly {
+    justify-content: space-evenly;
   }
 }
 </style>
