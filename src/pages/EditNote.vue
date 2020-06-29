@@ -106,7 +106,10 @@ export default {
       this.confirmType = "discard";
       this.showConfirmDialog = true;
 
-      this.onConfirm = this.navigateToList;
+      this.onConfirm = () => {
+        this.resetHistory();
+        this.navigateToList();
+      };
     },
 
     handleRevert() {
@@ -115,8 +118,7 @@ export default {
 
       this.onConfirm = () => {
         this.closeConfirmDialog();
-        this.history.splice(1);
-        this.changeCounter = 0;
+        this.resetHistory();
         this.note = cloneNote(this.history[this.changeCounter]);
       };
     },
@@ -126,6 +128,7 @@ export default {
 
       if (isValid) {
         this.saveNote(this.note);
+        this.resetHistory();
         this.navigateToList();
       }
     },
@@ -136,6 +139,7 @@ export default {
 
       this.onConfirm = () => {
         this.removeNote(this.note.id);
+        this.resetHistory();
         this.navigateToList();
       };
     },
@@ -157,6 +161,11 @@ export default {
       } else {
         this.navigateToList();
       }
+    },
+
+    resetHistory() {
+      this.history.splice(1);
+      this.changeCounter = 0;
     },
 
     navigateToList() {

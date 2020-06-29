@@ -35,7 +35,7 @@ export default {
 
 .button {
   @include empty-button;
-  min-width: 60px;
+  min-width: 85px;
   padding: 8px 16px;
   border: 2px solid $border-color;
   border-radius: 4px;

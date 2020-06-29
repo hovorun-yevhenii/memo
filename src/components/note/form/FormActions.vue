@@ -1,25 +1,35 @@
 <template>
   <div class="actions">
     <div>
-      <text-button text="undo" :disabled="!canUndo" @click="$emit('undo')" />
+      <icon-button
+        icon="undo"
+        color="primary"
+        title="Undo"
+        :disabled="!canUndo"
+        @click="$emit('undo')"
+      />
       <text-button
         text="revert"
         :disabled="!canRevert"
         @click="$emit('revert')"
       />
-      <text-button text="redo" :disabled="!canRedo" @click="$emit('redo')" />
+      <icon-button
+        icon="redo"
+        color="primary"
+        title="Redo"
+        :disabled="!canRedo"
+        @click="$emit('redo')"
+      />
     </div>
 
     <div>
-      <text-button text="discard" @click="$emit('discard')" />
-
       <text-button
         v-if="!isNewNote"
         color="danger"
         text="delete"
         @click="$emit('remove')"
       />
-
+      <text-button text="discard" @click="$emit('discard')" />
       <text-button color="accent" text="save" @click="$emit('save')" />
     </div>
   </div>
@@ -27,10 +37,13 @@
 
 <script>
 import TextButton from "../../common/TextButton.vue";
+import IconButton from "../../common/IconButton.vue";
+
 export default {
   name: "FormActions",
   components: {
-    TextButton
+    TextButton,
+    IconButton
   },
   props: ["canUndo", "canRedo", "canRevert", "isNewNote"]
 };

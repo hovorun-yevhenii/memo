@@ -3,6 +3,7 @@
     class="icon-button"
     :class="color"
     :title="title"
+    :disabled="disabled"
     type="button"
     @click="handleClick"
   >
@@ -24,6 +25,10 @@ export default {
     color: {
       type: String,
       default: "default"
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -67,7 +72,12 @@ export default {
     color: $danger-color;
   }
 
-  &:hover {
+  &:disabled * {
+    cursor: not-allowed;
+    color: $border-color;
+  }
+
+  &:hover:not(:disabled) {
     background-color: rgba(black, 0.7);
   }
 }
