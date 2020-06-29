@@ -53,7 +53,7 @@ export default {
 
     .fill-accent {
       fill: $accent-color;
-      stroke: $default-bg;
+      stroke: $bg-color;
       transform-origin: center;
       transition: transform $transition-duration;
     }

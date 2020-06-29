@@ -183,7 +183,7 @@ export default {
 .form {
   flex-grow: 1;
   &__body {
-    background-color: $default-bg;
+    background: $default-bg;
     border: 1px solid $border-color;
     max-width: $breakpoint-phone;
     margin: 48px auto 0;
@@ -192,9 +192,8 @@ export default {
 
     @media (max-width: $breakpoint-phone) {
       margin: 0;
-      border-top: none;
-      border-right: none;
-      border-left: none;
+      border: none;
+      background: none;
     }
   }
   &__title {

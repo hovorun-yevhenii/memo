@@ -22,11 +22,12 @@ export default {
 
 .header {
   padding: 24px;
-  background-color: $default-bg;
+  background: $default-bg;
   border-bottom: 1px solid $border-color;
 
   @media (max-width: $breakpoint-phone) {
     padding: 12px;
+    background: none;
   }
 }
 </style>

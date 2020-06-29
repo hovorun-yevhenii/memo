@@ -73,7 +73,7 @@ export default {
     padding: 16px 32px;
     border-radius: 4px;
     border: 1px solid $border-color;
-    background-color: $default-bg;
+    background: $default-bg;
     margin: auto;
   }
 }

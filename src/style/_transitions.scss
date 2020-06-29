@@ -3,7 +3,8 @@
 //---------- MODAL ----------
 @keyframes dialog-enter {
   from {
-    transform: translate3d(0, -72px, 0);
+    transform: translateY(80%);
+    opacity: 0;
   }
 }
 
