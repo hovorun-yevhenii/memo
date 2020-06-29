@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import NoteCard from "../components/note/list/NoteCard.vue";
-import NewNoteButton from "../components/note/list/NewNoteButton.vue";
-import ConfirmDialog from "../components/common/modals/ConfirmDialog.vue";
+import NoteCard from "../components/note/list/NoteCard";
+import NewNoteButton from "../components/note/list/NewNoteButton";
+import { ConfirmDialog } from "../components/common";
 import { mapGetters, mapMutations } from "vuex";
 import { REMOVE_NOTE } from "../store/mutation-types";
 

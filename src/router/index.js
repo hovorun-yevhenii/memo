@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import NoteList from "../pages/NoteList.vue";
+import NoteList from "../pages/NoteList";
 
 Vue.use(VueRouter);
 
@@ -16,7 +16,7 @@ const router = new VueRouter({
     {
       path: "/note/:id",
       name: "note",
-      component: () => import("../pages/EditNote.vue")
+      component: () => import("../pages/EditNote")
     },
     {
       path: "*",

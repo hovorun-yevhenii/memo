@@ -33,9 +33,7 @@
 </template>
 
 <script>
-import IconButton from "../../common/IconButton.vue";
-import TextArea from "../../common/TextArea.vue";
-import AppCheckbox from "../../common/AppCheckbox.vue";
+import { TextArea, AppCheckbox, IconButton } from "../../common";
 import { getTodoSchema } from "../../../utils";
 import { TODO_ITEMS_MAX_COUNT } from "../../../constants";
 

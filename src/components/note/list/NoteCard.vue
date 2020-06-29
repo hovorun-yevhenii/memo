@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import AppCheckbox from "../../common/AppCheckbox.vue";
-import NoteCardActions from "./NoteCardActions.vue";
+import AppCheckbox from "../../common/AppCheckbox";
+import NoteCardActions from "./NoteCardActions";
 import { truncate } from "../../../utils";
 import {
   LIST_VIEW_MAX_TODO_COUNT,

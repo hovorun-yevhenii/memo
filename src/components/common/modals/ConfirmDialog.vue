@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import ModalWrapper from "./ModalWrapper.vue";
-import TextButton from "../TextButton.vue";
+import ModalWrapper from "./ModalWrapper";
+import TextButton from "../TextButton";
 import { SHORT_TITLE_LENGTH } from "../../../constants";
 import { truncate } from "../../../utils";
 

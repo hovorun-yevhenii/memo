@@ -40,13 +40,10 @@
 </template>
 
 <script>
-import TodoList from "../components/note/form/TodoList.vue";
-import FormActions from "../components/note/form/FormActions.vue";
-import TextArea from "../components/common/TextArea.vue";
-import ConfirmDialog from "../components/common/modals/ConfirmDialog.vue";
-
+import TodoList from "../components/note/form/TodoList";
+import FormActions from "../components/note/form/FormActions";
+import { ConfirmDialog, TextArea } from "../components/common";
 import undoRedo from "../mixins/undoRedo";
-
 import { mapGetters, mapMutations } from "vuex";
 import { NEW_NOTE_KEY } from "../constants";
 import { cloneNote, getNoteSchema } from "../utils";

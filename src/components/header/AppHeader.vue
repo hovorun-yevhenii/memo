@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import AppLogo from "./AppLogo.vue";
+import AppLogo from "./AppLogo";
 
 export default {
   name: "AppHeader",

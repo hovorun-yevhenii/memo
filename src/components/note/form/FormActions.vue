@@ -9,6 +9,7 @@
         @click="$emit('undo')"
       />
       <text-button
+        class="actions__revert"
         text="revert"
         :disabled="!canRevert"
         @click="$emit('revert')"
@@ -22,7 +23,7 @@
       />
     </div>
 
-    <div>
+    <div class="space-between">
       <text-button
         v-if="!isNewNote"
         color="danger"
@@ -36,8 +37,7 @@
 </template>
 
 <script>
-import TextButton from "../../common/TextButton.vue";
-import IconButton from "../../common/IconButton.vue";
+import { TextButton, IconButton } from "../../common";
 
 export default {
   name: "FormActions",
@@ -55,13 +55,19 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 288px;
+  width: 288px;
   padding: 32px 0;
   margin: 0 auto;
-  * {
-    margin: 8px 8px 0 8px;
+  &__revert {
+    margin: 16px;
+  }
+  > * {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+  .space-between {
+    justify-content: space-between;
   }
 }
 </style>

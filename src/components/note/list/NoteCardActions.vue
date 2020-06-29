@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import IconButton from "../../common/IconButton.vue";
+import IconButton from "../../common/IconButton";
 export default {
   name: "NoteCardActions",
   props: {

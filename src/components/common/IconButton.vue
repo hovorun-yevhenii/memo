@@ -1,12 +1,5 @@
 <template>
-  <button
-    class="icon-button"
-    :class="color"
-    :title="title"
-    :disabled="disabled"
-    type="button"
-    @click="handleClick"
-  >
+  <button class="icon-button" :class="color" type="button" @click="handleClick">
     <component :is="`svg-${icon}`" />
   </button>
 </template>
@@ -18,17 +11,8 @@ export default {
     icon: {
       type: String
     },
-    title: {
-      type: String,
-      default: ""
-    },
     color: {
-      type: String,
-      default: "default"
-    },
-    disabled: {
-      type: Boolean,
-      default: false
+      type: String
     }
   },
   methods: {
