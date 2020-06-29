@@ -171,6 +171,7 @@ export default {
 @import "../style/mixins";
 
 .form {
+  flex-grow: 1;
   &__body {
     background-color: $default-bg;
     border: 1px solid $border-color;
