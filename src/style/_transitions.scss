@@ -55,6 +55,16 @@
   transition: $transition-duration;
 }
 
+//-------------
+.todo-enter-active, .todo-leave-active, .todo-move {
+  transition: $transition-duration;
+}
+.todo-enter, .todo-leave-to {
+  opacity: 0;
+  transform: scaleX(.7) skewX(30deg);
+  transform-origin: 0 50%;
+}
+
 //---------- CHECKBOX ----------
 .checkbox-leave-active,
 .checkbox-enter-active {

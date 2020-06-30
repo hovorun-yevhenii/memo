@@ -1,26 +1,32 @@
 <template>
   <div class="list">
-    <div class="list__todo todo" v-for="(todo, index) in todoList" :key="index">
-      <app-checkbox
-        class="todo__checkbox"
-        v-model="todo.checked"
-        @input="handleChange"
-      />
+    <transition-group tag="div" name="todo">
+      <div
+        class="list__todo todo"
+        v-for="(todo, index) in todoList"
+        :key="todo.id"
+      >
+        <app-checkbox
+          class="todo__checkbox"
+          v-model="todo.checked"
+          @input="handleChange"
+        />
 
-      <text-area
-        class="todo__text"
-        v-model="todo.text"
-        @input="handleChange"
-        ref="todoText"
-        placeholder="Type todo text here..."
-      />
+        <text-area
+          class="todo__text"
+          v-model="todo.text"
+          @input="handleChange"
+          ref="todoText"
+          placeholder="Type todo text here..."
+        />
 
-      <icon-button
-        icon="close"
-        title="Remove todo"
-        @click="removeTodoItem(index)"
-      />
-    </div>
+        <icon-button
+          icon="close"
+          title="Remove todo"
+          @click="removeTodoItem(index)"
+        />
+      </div>
+    </transition-group>
 
     <icon-button
       v-if="todoList.length < TODO_ITEMS_MAX_COUNT"

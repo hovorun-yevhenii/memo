@@ -9,12 +9,8 @@ export const createMockNote = () => ({
     }))
 });
 
-export const createTestNotes = qty =>
-  Array(qty)
-    .fill("")
-    .map(createMockNote);
-
 export const getTodoSchema = () => ({
+  id: `${Date.now()}_${(Math.random() * 10e6).toFixed()}`,
   text: "",
   checked: false
 });

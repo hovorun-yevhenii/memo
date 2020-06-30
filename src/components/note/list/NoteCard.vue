@@ -10,7 +10,7 @@
       />
     </div>
 
-    <div v-for="(todo, index) in itemsToDisplay" :key="index" class="todo">
+    <div v-for="todo in itemsToDisplay" :key="todo.id" class="todo">
       <app-checkbox class="todo__checkbox" :value="todo.checked" disabled />
       <div class="todo__text">{{ todo.text }}</div>
     </div>
